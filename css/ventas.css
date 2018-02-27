@@ -1,0 +1,47 @@
+#divEncabezado {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #73AD21;
+}
+
+#divCategorias {
+    width: 25%;
+    margin-left: 5%;
+    float: left;
+}
+
+#divContenido {
+    width: 60%;
+    margin-left: 5%;
+    float: left;
+}
+
+#divContenidoCompleto {
+    width: 90%;
+    margin-left: 5%;
+    float: left;
+    padding: 10px;
+}
+
+h1 {
+    font-family: "Verdana";
+    font-size: 1.875em;
+}
+
+h2 {
+    font-family: "Verdana";
+    font-size: 1.4em;
+}
+
+.img-producto {
+    float:  left;
+    margin: 10px;
+}
+
+.divProducto {
+    clear: both;
+}
+
+
