@@ -38,7 +38,7 @@ function cargarCategoria(id) {
 }
 
 $(document).ready(function () {
-    cargarCategoria(1);
+    //cargarCategoria(1);
 
     $(".link-categoria").click(function () {
         var id = $(this).attr('categoria');
