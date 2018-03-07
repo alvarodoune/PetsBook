@@ -37,4 +37,12 @@ h2 {
     clear: both;
 }
 
+.aspect-ratio {
+    display: block;
+    max-width: 100%;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+}
+
 

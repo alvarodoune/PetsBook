@@ -43,7 +43,7 @@
                                     <h5 class="mb-1">{$pub.titulo}</h5>
                                     <div class="d-flex w-100 justify-content-between">
                                         <img src="imagenes/publicaciones/{$pub.image}" 
-                                             class="rounded float-left"
+                                             class="rounded float-left aspect-ratio"
                                              alt="{$pub.titulo}">    
                                         <small>
                                             {if $pub.tipo == "E"}
