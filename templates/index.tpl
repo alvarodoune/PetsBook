@@ -12,6 +12,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="./js/index.js"></script>
+        <link href="./libs/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     </head>
 
     <body>
@@ -29,21 +30,40 @@
                         {include file="./menuLateral.tpl"}
                     </div>
                 </div>
+
                 <div class="col-9">
                     <div id="divCategorias">
                         <h1>Publicaciones</h1>
-                        <ul>
+                        <div class="list-group">
                             {foreach from=$publicaciones item=pub}
-                                <li>
-                                    <a href="#" class="link-categoria" publicacion="{$pub.id}">
-                                        {$pub.titulo}
-                                    </a>
-                                </li>
+                                <a href="#" 
+                                   publicacion="{$pub.id}"
+                                   class="list-group-item list-group-item-action flex-column align-items-start"
+                                   >
+                                    <h5 class="mb-1">{$pub.titulo}</h5>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <img src="imagenes/publicaciones/{$pub.image}" 
+                                             class="rounded float-left"
+                                             alt="{$pub.titulo}">    
+                                        <small>
+                                            {if $pub.tipo == "E"}
+                                                <span class="oi oi-arrow-thick-left text-success"
+                                                      title="Encontrado" aria-hidden="true"></span>
+                                            {else}
+                                                <span class="oi oi-arrow-thick-right text-danger"
+                                                      title="Perdido" aria-hidden="true"></span>
+                                            {/if}
+                                        </small>
+                                    </div>
+                                    <p class="mb-1">
+                                        {$pub.descripcion}
+                                    </p>
+                                    <small>Fecha de publicación: {$pub.fechaPublicado}</small>
+                                </a>
                             {/foreach}
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </body>
 </html>

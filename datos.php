@@ -13,7 +13,7 @@ function getConexion() {
 function getPublicaciones() {
     
     $cn = getConexion();
-    $cn->consulta("SELECT * FROM publicaciones");
+    $cn->consulta("SELECT * FROM publicaciones LIMIT 10");
     $publicaciones = $cn->restantesRegistros();
     $cn->desconectar();
     
