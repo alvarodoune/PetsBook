@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Nuevo Producto</title>
+        <title>Nueva Publicación</title>
         <link rel="stylesheet" type="text/css" href="./css/ventas.css">
     </head>
     <body>
@@ -10,7 +10,7 @@
         {include file="encabezado.tpl"}
       
         <div id="divContenidoCompleto">
-            <form method="POST" action="./guardarProducto.php"
+            <form method="POST" action="./guardarPublicacion.php"
                   enctype="multipart/form-data">
                 <p> Nombre
                     <input type="text" name="nombre">

@@ -10,5 +10,5 @@ if(!isset($usuario)) {
 } else {
     $miSmarty = nuevoSmarty();
     $miSmarty->assign("publicaciones", getPublicaciones());
-    $miSmarty->display('nuevoProducto.tpl');
+    $miSmarty->display('nuevPublicacion.tpl');
 }

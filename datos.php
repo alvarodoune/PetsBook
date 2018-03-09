@@ -4,75 +4,69 @@ require_once './libs/Smarty.class.php';
 require_once './includes/class.Conexion.BD.php';
 
 function getConexion() {
-    $cn = new ConexionBD('mysql', 'localhost', 
-            'mascotas', 'root','root');
+    $cn = new ConexionBD('mysql', 'localhost', 'mascotas', 'root', 'root');
     $cn->conectar();
     return $cn;
 }
 
 function getPublicaciones() {
-    
+
     $cn = getConexion();
     $cn->consulta("SELECT * FROM publicaciones LIMIT 10");
     $publicaciones = $cn->restantesRegistros();
     $cn->desconectar();
-    
+
     return $publicaciones;
 }
 
 function getPublicacion($pubId) {
     $cn = getConexion();
-    $cn->consulta("SELECT * FROM publicaciones WHERE id = :id",
-            array(
-                array('id', $pubId, 'int')
-            ));
+    $cn->consulta("SELECT * FROM publicaciones WHERE id = :id", array(
+        array('id', $pubId, 'int')
+    ));
     $categoria = $cn->siguienteRegistro();
     $cn->desconectar();
-    
+
     return $categoria;
 }
 
 function guardarPublicacion($tit, $desc) {
     $cn = getConexion();
-    $cn->consulta("INSERT INTO publicaciones(titulo, descripcion) VALUES(:tit, :desc)",
-            array(
-                array('titulo', $tit, 'string'),
-                array('descricion', $desc, 'string')
-            ));
+    $cn->consulta("INSERT INTO publicaciones(titulo, descripcion) VALUES(:tit, :desc)", array(
+        array('titulo', $tit, 'string'),
+        array('descricion', $desc, 'string')
+    ));
     $cn->desconectar();
 }
 
-
 function getProductos($catId, $pagina = 1) {
-   
+
     $porPagina = 3;
     $desde = ($pagina - 1) * $porPagina;
-    
+
     $cn = getConexion();
     $cn->consulta("
         SELECT count(*) as total 
         FROM productos
         WHERE id_categoria = :catId 
-        ",
-        array(
-            array('catId', $catId, 'int')
-        ));
-    
+        ", array(
+        array('catId', $catId, 'int')
+    ));
+
     $total = $cn->siguienteRegistro()['total'] / $porPagina;
-    
+
     $cn->consulta("
             SELECT * FROM productos 
             WHERE id_categoria = :catId 
             LIMIT :desde, :cantidad
-            ",
-            array(
-                array('catId', $catId, 'int'),
-                array('desde', $desde, 'int'),
-                array('cantidad', $porPagina, 'int'),
-            ));
+            ", array(
+        array('catId', $catId, 'int'),
+        array('desde', $desde, 'int'),
+        array('cantidad', $porPagina, 'int'),
+    ));
     $productos = $cn->restantesRegistros();
     $cn->desconectar();
-    
+
     return array(
         'total' => $total,
         'objetos' => $productos
@@ -94,17 +88,15 @@ function getProducto($id) {
 
 function guardarProducto($nombre, $descripcion, $catId) {
     $cn = getConexion();
-    $cn->consulta("INSERT INTO productos(nombre, descripcion, id_categoria) VALUES(:nombre, :descripcion, :catId)",
-            array(
-                array('nombre', $nombre, 'string'),
-                array('descripcion', $descripcion, 'string'),
-                array('catId', $catId, 'int')
-            ));
+    $cn->consulta("INSERT INTO productos(nombre, descripcion, id_categoria) VALUES(:nombre, :descripcion, :catId)", array(
+        array('nombre', $nombre, 'string'),
+        array('descripcion', $descripcion, 'string'),
+        array('catId', $catId, 'int')
+    ));
     $id = $cn->ultimoIdInsert();
     $cn->desconectar();
     return $id;
 }
-
 
 /*
   Funcion que valida credenciales de un usuario. Ahora lo
@@ -113,7 +105,32 @@ function guardarProducto($nombre, $descripcion, $catId) {
 
 function login($usuario, $clave, $recordar) {
     $usuario_logueado = NULL;
-    if ($usuario == 'test' && $clave == 'test') {
+    $db = getConexion();
+
+    $myusername = mysqli_real_escape_string($db, $usuario);
+    $mypassword = mysqli_real_escape_string($db, $clave);
+
+//    $sql = "SELECT id FROM usuarios WHERE email = '$myusername' and password = '$mypassword'";
+//    $result = mysqli_query($db, $sql);
+//    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+//    $active = $row['active'];
+
+    $db->consulta("SELECT id FROM usuarios WHERE email = :email AND password = :password", array(
+    array('email', $usuario, 'string'),
+    array('password', $mypassword, 'string')
+    ));
+
+    $id = $db->ultimoIdInsert();
+    $db->desconectar();
+    
+    return $id;
+
+    // If result matched $myusername and $mypassword, table row must be 1 row
+
+    if ($count == 1) {
+        // session_register("myusername");
+        // $_SESSION['login_user'] = $myusername;
+
         $usuario_logueado = array(
             'id' => 1,
             'login' => 'test',
@@ -124,6 +141,10 @@ function login($usuario, $clave, $recordar) {
         if ($recordar) {
             setcookie('recordar', $usuario_logueado['guid'], time() + (60 * 60 * 24), "/");
         }
+
+        // header("location: welcome.php");
+    } else {
+        $error = "Your Login Name or Password is invalid";
     }
 
     return $usuario_logueado;
