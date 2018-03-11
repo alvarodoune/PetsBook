@@ -24,10 +24,10 @@ function getPublicacion($pubId) {
     $cn->consulta("SELECT * FROM publicaciones WHERE id = :id", array(
         array('id', $pubId, 'int')
     ));
-    $categoria = $cn->siguienteRegistro();
+    $pub = $cn->siguienteRegistro();
     $cn->desconectar();
 
-    return $categoria;
+    return $pub;
 }
 
 function guardarPublicacion($tit, $desc) {

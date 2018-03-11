@@ -36,7 +36,8 @@
                         <h1>Publicaciones</h1>
                         <div class="list-group">
                             {foreach from=$publicaciones item=pub}
-                                <a href="#" 
+                                <a href="./detallePublicacion.php?id={$pub.id}"
+                                   target="_blank"
                                    publicacion="{$pub.id}"
                                    class="list-group-item list-group-item-action flex-column align-items-start"
                                    >
@@ -56,7 +57,7 @@
                                         </small>
                                     </div>
                                     <p class="mb-1">
-                                        {$pub.descripcion}
+                                        {substr($pub.descripcion,0,150)}...
                                     </p>
                                     <small>Fecha de publicación: {$pub.fechaPublicado}</small>
                                 </a>
