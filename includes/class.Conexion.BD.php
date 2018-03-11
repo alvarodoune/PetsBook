@@ -157,6 +157,14 @@ class ConexionBD
 	function cantidadRegistros(){
 		return $this->sentencia->rowCount();
 	}
+        
+        function fetchColum() {
+            return $this->sentencia->fetchColumn();
+        }
+        
+        function fetchColumParam($param) {
+            return $this->sentencia->fetchColumn($param);
+        }
 }
 
 ?>

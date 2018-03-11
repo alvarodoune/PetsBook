@@ -107,36 +107,38 @@ function login($usuario, $clave, $recordar) {
     $usuario_logueado = NULL;
     $db = getConexion();
 
-    $myusername = mysqli_real_escape_string($db, $usuario);
-    $mypassword = mysqli_real_escape_string($db, $clave);
+    $myusername = mysqli_real_escape_string($usuario);
+    $mypassword = mysqli_real_escape_string($clave);
 
 //    $sql = "SELECT id FROM usuarios WHERE email = '$myusername' and password = '$mypassword'";
 //    $result = mysqli_query($db, $sql);
 //    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 //    $active = $row['active'];
+    
+    $sql = "SELECT COUNT(*) FROM usuarios WHERE email = :email AND password = :password";
 
-    $db->consulta("SELECT id FROM usuarios WHERE email = :email AND password = :password", array(
+    $db->consulta($sql, array(
     array('email', $usuario, 'string'),
-    array('password', $mypassword, 'string')
+    array('password', $clave, 'string')
     ));
 
-    $id = $db->ultimoIdInsert();
-    $db->desconectar();
-    
-    return $id;
+    $count = $db->fetchColum();
 
     // If result matched $myusername and $mypassword, table row must be 1 row
-
     if ($count == 1) {
+        $db->desconectar();
         // session_register("myusername");
         // $_SESSION['login_user'] = $myusername;
+        
+        $db = getConexion();
+        $sql = "SELECT email as id, nombre FROM usuarios WHERE email = :email AND password = :password";
 
-        $usuario_logueado = array(
-            'id' => 1,
-            'login' => 'test',
-            'nombre' => 'Usuario de prueba',
-            'guid' => '123456789ABCDEF123456'
-        );
+        $db->consulta($sql, array(
+        array('email', $usuario, 'string'),
+        array('password', $clave, 'string')
+        ));
+        
+        $usuario_logueado = $db->siguienteRegistro();
 
         if ($recordar) {
             setcookie('recordar', $usuario_logueado['guid'], time() + (60 * 60 * 24), "/");
@@ -147,6 +149,7 @@ function login($usuario, $clave, $recordar) {
         $error = "Your Login Name or Password is invalid";
     }
 
+    $db->desconectar();
     return $usuario_logueado;
 }
 

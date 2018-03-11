@@ -36,7 +36,7 @@
                 </li>
                 {if (isset($usuario))}
                     <li class="nav-item">
-                        <a class="nav-link" href="./doLogout.php">Salir</a>
+                        <a class="nav-link text-danger" href="./doLogout.php">Salir</a>
                     </li>
                 {else}
                     <li class="nav-item">
