@@ -24,6 +24,44 @@
                     </div>
                 </div>
             </div>
+            <nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand" href="#">Filtros avanzados +</a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <label for="tipo-de-publicacion">Tipo de publicación</label>
+                            <select id="tipo-de-publicacion">
+                                <option value="">Encontrada</option>
+                                <option value="">Perdida</option>
+                            </select>
+                        </li>
+                        <li class="nav-item">
+                            <label for="especie">Especie</label>
+                            <select id="especie">
+                                <option value="">Algo...</option>
+                                <option value="">Algo...</option>
+                            </select>
+                        </li>
+                        <li class="nav-item">
+                            <label for="raza">Raza</label>
+                            <select id="raza">
+                                <option value="">Algo...</option>
+                                <option value="">Algo...</option>
+                            </select>
+                        </li>
+                        <li class="nav-item">
+                            <label for="barrio">Barrio</label>
+                            <select id="barrio">
+                                <option value="">Algo...</option>
+                                <option value="">Algo...</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
             <div class="row">
                 <div class="col-3">
                     <div id="divMenuLateral">
