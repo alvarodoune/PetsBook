@@ -22,7 +22,7 @@ function getEspecies()
 function getRazas()
 {
     $conn = getConexion();
-    $conn->consulta('SELECT id, nombre FROM razas');
+    $conn->consulta('SELECT * FROM razas');
     $razas = $conn->restantesRegistros();
     $conn->desconectar();
     

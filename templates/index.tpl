@@ -52,9 +52,9 @@
                             <label for="raza">Raza</label>
                             <select id="raza">
                                 <option value="0"></option>
-                                {*foreach from=$razas item=r}
+                                {foreach from=$razas item=r}
                                     <option value={$r.id}>{$r.nombre}</option>
-                                {/foreach*}
+                                {/foreach}
                             </select>
                         </li>
                         <li class="nav-item">
