@@ -60,6 +60,17 @@ function getPublicacion($pubId) {
     return $pub;
 }
 
+function getImagenesPublicacion($pubId) {
+    $cn = getConexion();
+    $cn->consulta("SELECT * FROM imagenes WHERE id_publicacion = :id", array(
+        array('id', $pubId, 'int')
+    ));
+    $pub = $cn->restantesRegistros();
+    $cn->desconectar();
+
+    return $pub;
+}
+
 function guardarPublicacion($tit, $desc) {
     $cn = getConexion();
     $cn->consulta("INSERT INTO publicaciones(titulo, descripcion) VALUES(:tit, :desc)", array(

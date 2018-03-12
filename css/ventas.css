@@ -1,21 +1,21 @@
 .totalContainer {
-    
+
 }
 
 #divMenuLateral {
-    
+
 }
 
 #divCategorias {
-    
+
 }
 
 #divContenido {
-    
+
 }
 
 #divContenidoCompleto {
-    
+
 }
 
 h1 {
@@ -35,6 +35,11 @@ h2 {
 
 .divProducto {
     clear: both;
+}
+
+#carouselExampleIndicators {
+    width: 400px;
+    margin: auto;
 }
 
 .aspect-ratio {
