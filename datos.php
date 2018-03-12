@@ -9,6 +9,36 @@ function getConexion() {
     return $cn;
 }
 
+function getEspecies()
+{
+    $conn = getConexion();
+    $conn->consulta('SELECT * FROM especies');
+    $especies = $conn->restantesRegistros();
+    $conn->desconectar();
+    
+    return $especies;
+}
+
+function getRazas()
+{
+    $conn = getConexion();
+    $conn->consulta('SELECT id, nombre FROM razas');
+    $razas = $conn->restantesRegistros();
+    $conn->desconectar();
+    
+    return $razas;
+}
+
+function getBarrios()
+{
+    $conn = getConexion();
+    $conn->consulta('SELECT * FROM barrios');
+    $barrios = $conn->restantesRegistros();
+    $conn->desconectar();
+    
+    return $barrios;
+}
+
 function getPublicaciones() {
 
     $cn = getConexion();

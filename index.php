@@ -9,4 +9,7 @@ if (!isset($catId)) {
 
 $miSmarty = nuevoSmarty();
 $miSmarty->assign('publicaciones', getPublicaciones());
+$miSmarty->assign('especies', getEspecies());
+//$miSmarty->assing('razas', getRazas());
+$miSmarty->assign('barrios', getBarrios());
 $miSmarty->display('index.tpl');

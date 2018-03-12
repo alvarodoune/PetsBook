@@ -34,6 +34,7 @@
                         <li class="nav-item active">
                             <label for="tipo-de-publicacion">Tipo de publicación</label>
                             <select id="tipo-de-publicacion">
+                                <option value=""></option>
                                 <option value="">Encontrada</option>
                                 <option value="">Perdida</option>
                             </select>
@@ -41,22 +42,28 @@
                         <li class="nav-item">
                             <label for="especie">Especie</label>
                             <select id="especie">
-                                <option value="">Algo...</option>
-                                <option value="">Algo...</option>
+                                <option value="0"></option>
+                                {foreach from=$especies item=e}
+                                    <option value={$e.id}>{$e.nombre}</option>
+                                {/foreach}
                             </select>
                         </li>
                         <li class="nav-item">
                             <label for="raza">Raza</label>
                             <select id="raza">
-                                <option value="">Algo...</option>
-                                <option value="">Algo...</option>
+                                <option value="0"></option>
+                                {*foreach from=$razas item=r}
+                                    <option value={$r.id}>{$r.nombre}</option>
+                                {/foreach*}
                             </select>
                         </li>
                         <li class="nav-item">
                             <label for="barrio">Barrio</label>
                             <select id="barrio">
-                                <option value="">Algo...</option>
-                                <option value="">Algo...</option>
+                                <option value="0"></option>
+                                {foreach from=$barrios item=b}
+                                    <option value={$b.id}>{$b.nombre}</option>
+                                {/foreach}
                             </select>
                         </li>
                     </ul>
