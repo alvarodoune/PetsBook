@@ -6,7 +6,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./css/ventas.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="./js/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -66,6 +67,9 @@
                                 {/foreach}
                             </select>
                         </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnFiltrar">Actualizar</button>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -79,8 +83,8 @@
                 <div class="col-9">
                     <div id="divCategorias">
                         <h1>Publicaciones</h1>
-                        <div class="list-group">
-                            {foreach from=$publicaciones item=pub}
+                        <div class="list-group" id="publicaciones">
+                            {*foreach from=$publicaciones item=pub}
                                 <a href="./detallePublicacion.php?id={$pub.id}"
                                    target="_blank"
                                    publicacion="{$pub.id}"
@@ -106,7 +110,7 @@
                                     </p>
                                     <small>Fecha de publicación: {$pub.fechaPublicado}</small>
                                 </a>
-                            {/foreach}
+                            {/foreach*}
                         </div>
                     </div>
                 </div>

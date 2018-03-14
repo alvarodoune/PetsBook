@@ -1,51 +1,48 @@
-var pagina = 1;
-var categoria = 1;
+$(document).ready(inicializar);
 
-function cargarCategoria(id) {
-    
-    categoria = id;
-    
+function inicializar(){
+    $('#btnFiltrar').click(aplicarFiltro);
+}
+
+function aplicarFiltro(){
     $.ajax({
-        url: 'contenido.php',
-        dataType: 'html',
-        data: {cat: id, pag: pagina }
-    }).done(function (html) {
-        $('#divContenido').html(html);
-
-        $("#anterior").click(function () {
-            pagina = pagina - 1;
-            cargarCategoria(categoria, pagina);
-        });
-
-        $("#siguiente").click(function () {
-            pagina = pagina + 1;
-            cargarCategoria(categoria, pagina);
-        });
-        
-        $("#primero").click(function () {
-            pagina = 1;
-            cargarCategoria(categoria, pagina);
-        });
-        
-         $("#ultimo").click(function () {
-            pagina = $("#total").val();
-            cargarCategoria(categoria, pagina);
-        });
-
-    }).fail(function () {
-        alert('no se pudo cargar el contenido');
+        url: 'filtros.php',
+        type: 'POST',
+        dataType: 'json',
+        data: 'filtro=' + $('#txtFiltro').val(),
+        success: publicacionesRefresh
     });
 }
 
-$(document).ready(function () {
-    //cargarCategoria(1);
-
-    $(".link-categoria").click(function () {
-        var id = $(this).attr('categoria');
-        cargarCategoria(id);
-    });
-
-
-});
-
-
+function publicacionesRefresh(datos){
+    $('#publicaciones').empty();
+    publicaciones = datos['publicaciones'];
+    for (var i = 0; i < publicaciones.length - 1; i++) {
+        publicacion = publicaciones[i];
+        fila = '<a href="./detallePublicacion.php?id=' + publicacion['id'] + ' target="_blank" publicacion='+ publicacion['id'];
+        fila += ' class="list-group-item list-group-item-action flex-column align-items-start">';
+        fila += ' <h5 class="mb-1">'+ publicacion['titulo'] +'</h5>';
+        fila += ' <div class="d-flex w-100 justify-content-between">';
+        fila += '     <img src="imagenes/publicaciones/'+ publicacion['imagen'] +'"';
+        fila += '          class="rounded float-left aspect-ratio"';
+        fila += '          alt="'+ publicacion['titulo']+'">';    
+        fila += '     <small>';
+        if (publicacion['tipo'] === 'E') {
+            fila += '   <span class="oi oi-arrow-thick-left text-success"';
+            fila += '       title="Encontrado" aria-hidden="true"></span>';
+        }
+        else {
+            fila += '   <span class="oi oi-arrow-thick-right text-danger"';
+            fila += '       title="Perdido" aria-hidden="true"></span>';
+        }
+        fila += '</small>';
+        fila += ' </div>';
+        fila += ' <p class="mb-1">';
+        fila +=     publicacion['descripcion'];
+        fila += ' </p>';
+        fila += ' <small>Fecha de publicación: {$pub.fechaPublicado}</small>';
+        fila += ' </a>';
+        
+        $('#publicaciones').append(fila);
+    }
+}
