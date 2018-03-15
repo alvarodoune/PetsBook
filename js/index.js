@@ -2,6 +2,10 @@ $(document).ready(inicializar);
 
 function inicializar(){
     $('#btnFiltrar').click(aplicarFiltro);
+$(".responderPregunta").click(function ($event) {
+var id = $(this).data('id');
+alert("Handler for .click() called.");
+});
 }
 
 function aplicarFiltro(){

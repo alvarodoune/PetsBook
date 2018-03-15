@@ -2,18 +2,17 @@
 
 require_once './datos.php';
 
-$id = $_GET['id'];
-$publicacion = getPublicacion($id);
-$imagenes = getImagenesPublicacion($id);
+$pubId = $_GET['id'];
+$publicacion = getPublicacion($pubId);
 
-//print_r($imagenes);
 
 if (empty($publicacion)) {
     echo '<h1 style="color:red">Ha ocurrido un error!</h1>';
 } else {
     $miSmarty = nuevoSmarty();
     $miSmarty->assign('publicacion', $publicacion);
-    $miSmarty->assign('imagenes', $imagenes);
+    $miSmarty->assign('preguntas', getPreguntasPublicacion($pubId));
+    $miSmarty->assign('imagenes', getImagenesPublicacion($pubId));
     $miSmarty->display('detallePublicacion.tpl');
 }
 

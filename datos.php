@@ -9,33 +9,30 @@ function getConexion() {
     return $cn;
 }
 
-function getEspecies()
-{
+function getEspecies() {
     $conn = getConexion();
     $conn->consulta('SELECT * FROM especies');
     $especies = $conn->restantesRegistros();
     $conn->desconectar();
-    
+
     return $especies;
 }
 
-function getRazas()
-{
+function getRazas() {
     $conn = getConexion();
     $conn->consulta('SELECT * FROM razas');
     $razas = $conn->restantesRegistros();
     $conn->desconectar();
-    
+
     return $razas;
 }
 
-function getBarrios()
-{
+function getBarrios() {
     $conn = getConexion();
     $conn->consulta('SELECT * FROM barrios');
     $barrios = $conn->restantesRegistros();
     $conn->desconectar();
-    
+
     return $barrios;
 }
 
@@ -51,13 +48,28 @@ function getPublicaciones() {
 
 function getPublicacion($pubId) {
     $cn = getConexion();
-    $cn->consulta("SELECT * FROM publicaciones WHERE id = :id", array(
+    $cn->consulta("SELECT p . * , r.nombre AS raza, e.nombre AS especie
+        FROM publicaciones p
+        INNER JOIN razas r ON p.raza_id = r.id
+        INNER JOIN especies e ON p.especie_id = e.id
+        WHERE p.id = :id", array(
         array('id', $pubId, 'int')
     ));
     $pub = $cn->siguienteRegistro();
     $cn->desconectar();
 
     return $pub;
+}
+
+function getPreguntasPublicacion($pubId) {
+    $cn = getConexion();
+    $cn->consulta("SELECT * FROM preguntas WHERE id_publicacion = :id", array(
+        array('id', $pubId, 'int')
+    ));
+    $preg = $cn->restantesRegistros();
+    $cn->desconectar();
+
+    return $preg;
 }
 
 function getImagenesPublicacion($pubId) {
@@ -155,12 +167,12 @@ function login($usuario, $clave, $recordar) {
 //    $result = mysqli_query($db, $sql);
 //    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 //    $active = $row['active'];
-    
+
     $sql = "SELECT COUNT(*) FROM usuarios WHERE email = :email AND password = :password";
 
     $db->consulta($sql, array(
-    array('email', $usuario, 'string'),
-    array('password', $clave, 'string')
+        array('email', $usuario, 'string'),
+        array('password', $clave, 'string')
     ));
 
     $count = $db->fetchColum();
@@ -170,15 +182,15 @@ function login($usuario, $clave, $recordar) {
         $db->desconectar();
         // session_register("myusername");
         // $_SESSION['login_user'] = $myusername;
-        
+
         $db = getConexion();
         $sql = "SELECT email as id, nombre FROM usuarios WHERE email = :email AND password = :password";
 
         $db->consulta($sql, array(
-        array('email', $usuario, 'string'),
-        array('password', $clave, 'string')
+            array('email', $usuario, 'string'),
+            array('password', $clave, 'string')
         ));
-        
+
         $usuario_logueado = $db->siguienteRegistro();
 
         if ($recordar) {

@@ -42,9 +42,9 @@
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                {foreach from=$imagenes item=img}
+                                    {foreach from=$imagenes item=img}
                                     <li data-target="#carouselExampleIndicators" data-slide-to="$img.id"></li>
-                                {/foreach}
+                                    {/foreach}
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
@@ -71,19 +71,31 @@
                             </a>
                         </div>
 
-
-
                         <div class="list-group">
                             <h5 class="mb-1">{$publicacion.titulo}</h5>
-                            <div class="d-flex w-100 justify-content-between">
-
-                            </div>
+                            <small>Raza: {$publicacion.raza}</small>
+                            <small>Especie: {$publicacion.especie}</small>
+                            <br>
                             <p class="mb-1">
                                 {$publicacion.descripcion}
                             </p>
                             <small>Fecha de publicación: {$publicacion.fechaPublicado}</small>
                         </div>
                     </div>
+
+                    {foreach from=$preguntas item=preg}
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">                            
+                                <h5 class="card-title">{$preg.usuario}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted"></h6>
+                                <p class="card-text">{$preg.texto}</p>
+                                <p class="card-text">{$preg.respuesta}</p>
+                                {if $preg.respuesta == ""}
+                                    <a href="#" data-id="{$preg.id}" onCl class="card-link responderPregunta">Responder</a>
+                                {/if}
+                            </div>
+                        </div>
+                    {/foreach}
                 </div>
             </div>
     </body>
