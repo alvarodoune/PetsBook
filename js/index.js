@@ -1,14 +1,14 @@
 $(document).ready(inicializar);
 
-function inicializar(){
+function inicializar() {
     $('#btnFiltrar').click(aplicarFiltro);
-$(".responderPregunta").click(function ($event) {
-var id = $(this).data('id');
-alert("Handler for .click() called.");
-});
+    $(".responderPregunta").click(function ($event) {
+        var id = $(this).data('id');
+        alert("Handler for .click() called.");
+    });
 }
 
-function aplicarFiltro(){
+function aplicarFiltro() {
     $.ajax({
         url: 'filtros.php',
         type: 'POST',
@@ -18,35 +18,34 @@ function aplicarFiltro(){
     });
 }
 
-function publicacionesRefresh(datos){
+function publicacionesRefresh(datos) {
     $('#publicaciones').empty();
     publicaciones = datos['publicaciones'];
     for (var i = 0; i < publicaciones.length - 1; i++) {
         publicacion = publicaciones[i];
-        fila = '<a href="./detallePublicacion.php?id=' + publicacion['id'] + ' target="_blank" publicacion='+ publicacion['id'];
+        fila = '<a href="./detallePublicacion.php?id=' + publicacion['id'] + ' target="_blank" publicacion=' + publicacion['id'];
         fila += ' class="list-group-item list-group-item-action flex-column align-items-start">';
-        fila += ' <h5 class="mb-1">'+ publicacion['titulo'] +'</h5>';
+        fila += ' <h5 class="mb-1">' + publicacion['titulo'] + '</h5>';
         fila += ' <div class="d-flex w-100 justify-content-between">';
-        fila += '     <img src="imagenes/publicaciones/'+ publicacion['imagen'] +'"';
+        fila += '     <img src="imagenes/publicaciones/' + publicacion['imagen'] + '"';
         fila += '          class="rounded float-left aspect-ratio"';
-        fila += '          alt="'+ publicacion['titulo']+'">';    
+        fila += '          alt="' + publicacion['titulo'] + '">';
         fila += '     <small>';
         if (publicacion['tipo'] === 'E') {
             fila += '   <span class="oi oi-arrow-thick-left text-success"';
             fila += '       title="Encontrado" aria-hidden="true"></span>';
-        }
-        else {
+        } else {
             fila += '   <span class="oi oi-arrow-thick-right text-danger"';
             fila += '       title="Perdido" aria-hidden="true"></span>';
         }
         fila += '</small>';
         fila += ' </div>';
         fila += ' <p class="mb-1">';
-        fila +=     publicacion['descripcion'];
+        fila += publicacion['descripcion'];
         fila += ' </p>';
         fila += ' <small>Fecha de publicación: {$pub.fechaPublicado}</small>';
         fila += ' </a>';
-        
+
         $('#publicaciones').append(fila);
     }
 }
