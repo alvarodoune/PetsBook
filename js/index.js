@@ -13,7 +13,11 @@ function aplicarFiltro() {
         url: 'filtros.php',
         type: 'POST',
         dataType: 'json',
-        data: 'filtro=' + $('#txtFiltro').val(),
+        data: {filtro : $('#txtFiltro').val(), 
+            tipo : $('#cmbTipoDePublicacion').val(),
+            especie: $('#cmbEspecie').val(),
+            raza: $('#cmbRaza').val(),
+            barrio: $('#cmbBarrio').val()},
         success: publicacionesRefresh
     });
 }
@@ -21,7 +25,7 @@ function aplicarFiltro() {
 function publicacionesRefresh(datos) {
     $('#publicaciones').empty();
     publicaciones = datos['publicaciones'];
-    for (var i = 0; i < publicaciones.length - 1; i++) {
+    for (var i = 0; i < publicaciones.length; i++) {
         publicacion = publicaciones[i];
         fila = '<a href="./detallePublicacion.php?id=' + publicacion['id'] + ' target="_blank" publicacion=' + publicacion['id'];
         fila += ' class="list-group-item list-group-item-action flex-column align-items-start">';

@@ -33,16 +33,16 @@
                 <div class="navbar-collapse collapse" id="navbarsExample01" style="">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <label for="tipo-de-publicacion">Tipo de publicación</label>
-                            <select id="tipo-de-publicacion">
-                                <option value=""></option>
-                                <option value="">Encontrada</option>
-                                <option value="">Perdida</option>
+                            <label for="cmbTipoDePublicacion">Tipo de publicación</label>
+                            <select id="cmbTipoDePublicacion">
+                                <option value="0"></option>
+                                <option value="E">Encontrada</option>
+                                <option value="P">Perdida</option>
                             </select>
                         </li>
                         <li class="nav-item">
-                            <label for="especie">Especie</label>
-                            <select id="especie">
+                            <label for="cmbEspecie">Especie</label>
+                            <select id="cmbEspecie">
                                 <option value="0"></option>
                                 {foreach from=$especies item=e}
                                     <option value={$e.id}>{$e.nombre}</option>
@@ -50,8 +50,8 @@
                             </select>
                         </li>
                         <li class="nav-item">
-                            <label for="raza">Raza</label>
-                            <select id="raza">
+                            <label for="cmbRaza">Raza</label>
+                            <select id="cmbRaza">
                                 <option value="0"></option>
                                 {foreach from=$razas item=r}
                                     <option value={$r.id}>{$r.nombre}</option>
@@ -59,8 +59,8 @@
                             </select>
                         </li>
                         <li class="nav-item">
-                            <label for="barrio">Barrio</label>
-                            <select id="barrio">
+                            <label for="cmbBarrio">Barrio</label>
+                            <select id="cmbBarrio">
                                 <option value="0"></option>
                                 {foreach from=$barrios item=b}
                                     <option value={$b.id}>{$b.nombre}</option>
