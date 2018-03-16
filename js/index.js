@@ -53,6 +53,11 @@ function inicializar() {
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     });
+    cargarPublicaciones();
+}
+
+function cargarPublicaciones(){
+    aplicarFiltro();
 }
 
 function aplicarFiltro() {
@@ -94,7 +99,7 @@ function publicacionesRefresh(datos) {
         fila += ' <p class="mb-1">';
         fila += publicacion['descripcion'];
         fila += ' </p>';
-        fila += ' <small>Fecha de publicación: {$pub.fechaPublicado}</small>';
+        fila += ' <small>Fecha de publicación: '+ publicacion['fechaPublicado'] +'</small>';
         fila += ' </a>';
 
         $('#publicaciones').append(fila);
