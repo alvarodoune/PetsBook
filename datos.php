@@ -151,6 +151,17 @@ function guardarProducto($nombre, $descripcion, $catId) {
     return $id;
 }
 
+function insertarRespuesta($id, $respuesta) {
+    $cn = getConexion();
+    $cn->consulta("UPDATE preguntas SET respuesta = :respuesta WHERE id = :id", array(
+        array('respuesta', $respuesta, 'string'),
+        array('id', $id, 'int')
+    ));
+    $cont = $cn->cantidadRegistros();
+    $cn->desconectar();
+    return $cont;
+}
+
 /*
   Funcion que valida credenciales de un usuario. Ahora lo
   tiene harcoded, luego sera desde la base de datos
@@ -184,7 +195,7 @@ function login($usuario, $clave, $recordar) {
         // $_SESSION['login_user'] = $myusername;
 
         $db = getConexion();
-        $sql = "SELECT email as id, nombre FROM usuarios WHERE email = :email AND password = :password";
+        $sql = "SELECT id, nombre FROM usuarios WHERE email = :email AND password = :password";
 
         $db->consulta($sql, array(
             array('email', $usuario, 'string'),

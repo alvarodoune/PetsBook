@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./css/ventas.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="./js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -84,19 +84,63 @@
                     </div>
 
                     {foreach from=$preguntas item=preg}
-                        <div class="card" style="width: 18rem;">
+                        <div class="card col-12">
                             <div class="card-body">                            
                                 <h5 class="card-title">{$preg.usuario}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted"></h6>
-                                <p class="card-text">{$preg.texto}</p>
-                                <p class="card-text">{$preg.respuesta}</p>
-                                {if $preg.respuesta == ""}
-                                    <a href="#" data-id="{$preg.id}" onCl class="card-link responderPregunta">Responder</a>
+                                <div class="alert alert-primary text-left" role="alert">
+                                    <p class="card-text">{$preg.texto}</p>
+                                </div>
+                                {if $preg.respuesta != ""}
+                                    <div class="alert alert-dark text-right" role="alert">
+                                        <p class="card-text">{$preg.respuesta}</p>
+                                    </div>
+                                {else}
+                                    {if (isset($usuario) && $usuario.id == $preg.usuario_id)}
+                                        <button type="button" 
+                                                class="btn btn-primary" 
+                                                data-toggle="modal" 
+                                                data-target="#answerModal" 
+                                                data-id="{$preg.id}">Responder</button>
+                                    {/if}
                                 {/if}
                             </div>
                         </div>
                     {/foreach}
                 </div>
             </div>
+
+            <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Respuesta</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="procesarRespuesta.php" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Respuesta:</label>
+                                    <textarea name="respuesta" class="form-control" id="message-text"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {*           <div id="answerSuccessAlert" class="alert alert-success" data-dismiss="alert" role="alert">
+            Su respuesta se ha guardado con éxito!
+            </div>
+
+            <script>
+            $("#answerSuccessAlert").hide();
+            </script>*}
     </body>
 </html>
