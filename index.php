@@ -6,6 +6,7 @@ $miSmarty->assign('publicaciones', getPublicaciones());
 $miSmarty->assign('especies', getEspecies());
 $miSmarty->assign('razas', getRazas());
 $miSmarty->assign('barrios', getBarrios());
+
 $miSmarty->display('index.tpl');
 
 ?>

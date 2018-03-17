@@ -73,44 +73,25 @@
                 </div>
             </nav>
             <div class="row">
-                <div class="col-3">
+                <!--<div class="col-3">
                     <div id="divMenuLateral">
                         {include file="./menuLateral.tpl"}
                     </div>
-                </div>
-
+                </div>-->
                 <div class="col-9">
                     <div id="divCategorias">
                         <h1>Publicaciones</h1>
                         <div class="list-group" id="publicaciones">
-                            {*foreach from=$publicaciones item=pub}
-                                <a href="./detallePublicacion.php?id={$pub.id}"
-                                   target="_blank"
-                                   publicacion="{$pub.id}"
-                                   class="list-group-item list-group-item-action flex-column align-items-start"
-                                   >
-                                    <h5 class="mb-1">{$pub.titulo}</h5>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <img src="imagenes/publicaciones/{$pub.image}" 
-                                             class="rounded float-left aspect-ratio"
-                                             alt="{$pub.titulo}">    
-                                        <small>
-                                            {if $pub.tipo == "E"}
-                                                <span class="oi oi-arrow-thick-left text-success"
-                                                      title="Encontrado" aria-hidden="true"></span>
-                                            {else}
-                                                <span class="oi oi-arrow-thick-right text-danger"
-                                                      title="Perdido" aria-hidden="true"></span>
-                                            {/if}
-                                        </small>
-                                    </div>
-                                    <p class="mb-1">
-                                        {substr($pub.descripcion,0,150)}...
-                                    </p>
-                                    <small>Fecha de publicación: {$pub.fechaPublicado}</small>
-                                </a>
-                            {/foreach*}
                         </div>
+                        <select id="cmbFilas">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="0">Todas</option>
+                        </select>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end" id="paginado"></ul>
+                        </nav>
                     </div>
                 </div>
             </div>

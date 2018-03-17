@@ -53,6 +53,9 @@ function inicializar() {
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     });
+    
+    $('#cmbFilas').change(aplicarFiltro);
+    
     cargarPublicaciones();
 }
 
@@ -61,6 +64,7 @@ function cargarPublicaciones(){
 }
 
 function aplicarFiltro() {
+    alert('El valor de la cantidad de filas es' + $('#cmbFilas').val());
     $.ajax({
         url: 'filtros.php',
         type: 'POST',
@@ -69,13 +73,16 @@ function aplicarFiltro() {
             tipo: $('#cmbTipoDePublicacion').val(),
             especie: $('#cmbEspecie').val(),
             raza: $('#cmbRaza').val(),
-            barrio: $('#cmbBarrio').val()},
+            barrio: $('#cmbBarrio').val(),
+            cantxpag: $('#cmbFilas').val()},
         success: publicacionesRefresh
     });
 }
 
 function publicacionesRefresh(datos) {
+    $('#paginado').empty();
     $('#publicaciones').empty();
+    paginas = datos['paginas'];
     publicaciones = datos['publicaciones'];
     for (var i = 0; i < publicaciones.length; i++) {
         publicacion = publicaciones[i];
@@ -103,5 +110,10 @@ function publicacionesRefresh(datos) {
         fila += ' </a>';
 
         $('#publicaciones').append(fila);
+    }
+    for (var i = 0; i < paginas; i++) {
+        pagina = i + 1;
+        fila = '<li class="page-item"><a class="page-link" href="#">'+pagina+'</a></li>';
+        $('#paginado').append(fila);
     }
 }
