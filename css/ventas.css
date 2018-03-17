@@ -18,6 +18,14 @@
 
 }
 
+.preguntas {
+    padding: 10px;
+}
+
+.preguntar {
+    padding: 10px 10px 10px 0px;
+}
+
 h1 {
     font-family: "Verdana";
     font-size: 1.875em;

@@ -162,6 +162,18 @@ function insertarRespuesta($id, $respuesta) {
     return $cont;
 }
 
+function hacerPregunta($id, $pregunta, $usuarioId) {
+    $cn = getConexion();
+    $cn->consulta("INSERT INTO preguntas (id_publicacion, texto, usuario_id) VALUES = (:id, :pregunta, :usuarioId)", array(
+        array('id', $id, 'int'),
+        array('pregunta', $pregunta, 'string'),
+        array('usuarioId', $usuarioId, 'int')
+    ));
+    $cont = $cn->cantidadRegistros();
+    $cn->desconectar();
+    return $cont;
+}
+
 /*
   Funcion que valida credenciales de un usuario. Ahora lo
   tiene harcoded, luego sera desde la base de datos

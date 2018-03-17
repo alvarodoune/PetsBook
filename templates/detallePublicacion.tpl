@@ -83,30 +83,77 @@
                         </div>
                     </div>
 
-                    {foreach from=$preguntas item=preg}
-                        <div class="card col-12">
-                            <div class="card-body">                            
-                                <h5 class="card-title">{$preg.usuario}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted"></h6>
-                                <div class="alert alert-primary text-left" role="alert">
-                                    <p class="card-text">{$preg.texto}</p>
-                                </div>
-                                {if $preg.respuesta != ""}
-                                    <div class="alert alert-dark text-right" role="alert">
-                                        <p class="card-text">{$preg.respuesta}</p>
+                    <div class="list-group preguntar">
+                        {if (isset($usuario))}
+                            <button type="button"
+                                    class="btn btn-success"
+                                    data-target="#question" 
+                                    data-usuario="{$usuario}"
+                                    data-id="{$publicacion.id}">Preguntar</button>
+                        {else}
+                            <p>Inicie session para preguntar</p>
+                        {/if}
+
+                        <div class="modal fade" id="questionModal" 
+                             tabindex="-1" 
+                             role="dialog" 
+                             aria-labelledby="exampleModalLabel" 
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Pregunta</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                {else}
-                                    {if (isset($usuario) && $usuario.id == $preg.usuario_id)}
-                                        <button type="button" 
-                                                class="btn btn-primary" 
-                                                data-toggle="modal" 
-                                                data-target="#answerModal" 
-                                                data-id="{$preg.id}">Responder</button>
-                                    {/if}
-                                {/if}
+                                    <form name="pregunta" 
+                                          id="pregunta" 
+                                          action="hacerPregunta.php" 
+                                          method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Pregunta:</label>
+                                                <textarea name="pregunta" class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    {/foreach}
+                        </div>     
+                    </div>
+                    <div class="preguntas list-group">
+                        {foreach from=$preguntas item=preg}
+                            <div class="card col-12">
+                                <div class="card-body">                            
+                                    <h5 class="card-title">{$preg.usuario}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted"></h6>
+                                    <div class="alert alert-primary text-left" role="alert">
+                                        <p class="card-text">{$preg.texto}</p>
+                                    </div>
+                                    {if $preg.respuesta != ""}
+                                        <div class="alert alert-dark text-right" role="alert">
+                                            <p class="card-text">{$preg.respuesta}</p>
+                                        </div>
+                                    {else}
+                                        {if (isset($usuario) && $usuario.id == $publicacion.usuario_id)}
+                                            <button type="button" 
+                                                    class="btn btn-primary" 
+                                                    data-toggle="modal"
+                                                    data-preg="{$preg.texto}"
+                                                    data-target="#answerModal" 
+                                                    data-id="{$preg.id}"
+                                                    >Responder</button>
+                                        {/if}
+                                    {/if}
+                                </div>
+                            </div>
+                        {/foreach}
+                    </div>
                 </div>
             </div>
 
@@ -119,7 +166,10 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="procesarRespuesta.php" method="POST">
+                        <form name="respuesta" 
+                              id="respuesta" 
+                              action="procesarRespuesta.php" 
+                              method="POST">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Respuesta:</label>

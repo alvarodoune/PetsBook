@@ -2,6 +2,8 @@ $(document).ready(inicializar);
 
 function inicializar() {
     var idPregunta;
+    var idPublicacion;
+    var usuario;
 
     $('#btnFiltrar').click(aplicarFiltro);
 //    $(".responderPregunta").click(function ($event) {
@@ -12,44 +14,79 @@ function inicializar() {
     $('#answerModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         idPregunta = button.data('id'); // Extract info from data-* attributes
+        var texto = button.data('preg');
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this);
-        modal.find('.modal-title').text('Respuesta a ' + idPregunta);
+        modal.find('.modal-title').text(texto);
         //modal.find('.modal-body input').val(recipient);
+    });
+    
+    $('#questionModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        idPublicacion = button.data('id');
+        usuario = button.data('usuario');
+        var modal = $(this);
+        modal.find('.modal-title').text("Escribe la pregunta que quieras hacer");
     });
 
     // process the form
     $('form').submit(function (event) {
-        // get the form data
-        // there are many ways to get this data using jQuery (you can use the class or id also)
-        var formData = {
-            'id': idPregunta,
-            'respuesta': $('textarea[name=respuesta]').val()
-        };
+        switch (event.target.id) {
+            case "respuesta":
+                var formData = {
+                    'id': idPregunta,
+                    'respuesta': $('textarea[name=respuesta]').val()
+                };
 
-        // process the form
-        $.ajax({
-            type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-            url: 'procesarRespuesta.php', // the url where we want to POST
-            data: formData, // our data object
-            dataType: 'json', // what type of data do we expect back from the server
-            encode: true
-        })
-                // using the done promise callback
-                .done(function (data) {
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: 'procesarRespuesta.php', // the url where we want to POST
+                    data: formData, // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        // using the done promise callback
+                        .done(function (data) {
 
-                    // log data to the console so we can see
-                    if (data.success) {
-                        $('#answerModal').modal('hide');
-                        //$('#superhero-group').append('<div class="help-block">' + data.errors.superheroAlias + '</div>');
-                        location.reload();
-                        console.log(data);
-                    } else {
-                        console.error(data.errors[0]);
-                    }
-                });
-
+                            // log data to the console so we can see
+                            if (data.success) {
+                                $('#answerModal').modal('hide');
+                                //$('#superhero-group').append('<div class="help-block">' + data.errors.superheroAlias + '</div>');
+                                location.reload();
+                                console.log(data);
+                            } else {
+                                console.error(data.errors[0]);
+                            }
+                        });
+                break;
+            case "pregunta":
+                
+                var formData = {
+                    'id': idPublicacion,
+                    'usuario': usuario,
+                    'pregunta': $('textarea[name=pregunta]').val()
+                };
+                
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: 'hacerPregunta.php', // the url where we want to POST
+                    data: formData, // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        .done(function (data) {
+                            if (data.success) {
+                                $('#questionModal').modal('hide');
+                                location.reload();
+                                console.log(data);
+                            } else {
+                                console.error(data.errors[0]);
+                            }
+                        });
+            break;
+        }
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     });
@@ -59,7 +96,7 @@ function inicializar() {
     cargarPublicaciones();
 }
 
-function cargarPublicaciones(){
+function cargarPublicaciones() {
     aplicarFiltro();
 }
 
@@ -106,7 +143,7 @@ function publicacionesRefresh(datos) {
         fila += ' <p class="mb-1">';
         fila += publicacion['descripcion'];
         fila += ' </p>';
-        fila += ' <small>Fecha de publicación: '+ publicacion['fechaPublicado'] +'</small>';
+        fila += ' <small>Fecha de publicación: ' + publicacion['fechaPublicado'] + '</small>';
         fila += ' </a>';
 
         $('#publicaciones').append(fila);
