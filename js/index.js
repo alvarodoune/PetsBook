@@ -161,7 +161,7 @@ function publicacionesRefresh(datos) {
     publicaciones = datos['publicaciones'];
     for (var i = 0; i < publicaciones.length; i++) {
         publicacion = publicaciones[i];
-        fila = '<a href="./detallePublicacion.php?id=' + publicacion['id'] + ' target="_blank" publicacion=' + publicacion['id'];
+        fila = '<a href="./detallePublicacion.php?id=' + publicacion['id'] + '" target="_blank" publicacion=' + publicacion['id'];
         fila += ' class="list-group-item list-group-item-action flex-column align-items-start">';
         fila += ' <h5 class="mb-1">' + publicacion['titulo'] + '</h5>';
         fila += ' <div class="d-flex w-100 justify-content-between">';

@@ -78,17 +78,14 @@
                 {include file="./menuLateral.tpl"}
             </div>
         </div>-->
-                <div class="col-9">
+                <div class="col-12">
                     <div id="divCategorias">
                         <h1>Publicaciones</h1>
-                        <div class="list-group preguntar">
+                        <div class="list-group preguntar" style="color: white">
                             {if (isset($usuario))}
-                                <button type="button"
-                                        class="btn btn-success"
-                                        data-toggle="modal"
-                                        data-target="#questionModal" 
-                                        data-usuario="{$usuario.id}"
-                                        data-id="{$publicacion.id}">Nueva Pregunta</button>
+                                <a class="btn btn-success">
+                                    Nueva Publicación
+                                </a>
                             {/if}
                         </div>
                         <div class="list-group" id="publicaciones">
