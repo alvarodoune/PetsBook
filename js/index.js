@@ -122,17 +122,28 @@ function inicializar() {
         event.preventDefault();
     });
 
-    $('#cmbFilas').change(aplicarFiltro);
+    $('#cmbFilas').change(function(){
+        alert('change???');
+        aplicarFiltro();
+    });
 
     cargarPublicaciones();
+    
+    $('#paginado').on('click', '.page-item', function(e){
+        aplicarFiltro($(this).attr('attr'));
+    });
 }
 
 function cargarPublicaciones() {
     aplicarFiltro();
 }
 
+<<<<<<< HEAD
 function aplicarFiltro() {
     // alert('El valor de la cantidad de filas es' + $('#cmbFilas').val());
+=======
+function aplicarFiltro(pagNro) {
+>>>>>>> Paginado fix
     $.ajax({
         url: 'filtros.php',
         type: 'POST',
@@ -142,7 +153,8 @@ function aplicarFiltro() {
             especie: $('#cmbEspecie').val(),
             raza: $('#cmbRaza').val(),
             barrio: $('#cmbBarrio').val(),
-            cantxpag: $('#cmbFilas').val()},
+            cantxpag: $('#cmbFilas').val(),
+            pagina: pagNro},
         success: publicacionesRefresh
     });
 }
@@ -179,9 +191,10 @@ function publicacionesRefresh(datos) {
 
         $('#publicaciones').append(fila);
     }
+    //Paginado
     for (var i = 0; i < paginas; i++) {
         pagina = i + 1;
-        fila = '<li class="page-item"><a class="page-link" href="#">' + pagina + '</a></li>';
+        fila = '<li class="page-item" attr="'+pagina+'"><a class="page-link" href="#">' + pagina + '</a></li>';
         $('#paginado').append(fila);
     }
 }

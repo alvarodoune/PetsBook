@@ -7,6 +7,7 @@
  */
 require_once './datos.php';
 
+//NOTA: Estas líneas comentadas son para probar la consulta desde el navegador
 //$filtro = $_GET['filtro'];
 //$tipo = $_GET['tipo'];
 //$especie = $_GET['especie'];
@@ -16,6 +17,10 @@ require_once './datos.php';
 ////Paginado
 //$from = 0;
 //$to = (int)$_GET['cantxpag'];
+//$pagina = (int)$_GET['pagina'];
+//if ($pagina <= 0) {
+//    $pagina = 1;
+//}
 
 $filtro = $_POST['filtro'];
 $tipo = $_POST['tipo'];
@@ -26,12 +31,14 @@ $barrio = $_POST['barrio'];
 //Paginado
 $from = 0;
 $to = (int)$_POST['cantxpag'];
-
+$pagina = $_POST['pagina'];
+if ($pagina <= 0) {
+    $pagina = 1;
+}
 /*
  * 
  */
 $response = array();
-$parametros = array();
 
 $sql = "SELECT *";
 $sql .= " FROM publicaciones";
@@ -60,6 +67,7 @@ $qty = $conn->cantidadRegistros();
 
 $cantPaginas = 0;
 if ($to != 0) {
+    $from = (($pagina - 1) * $to);
     $sql .= " LIMIT :from, :to";
     $parametros[0] = array('from', $from, 'int', 0);
     $parametros[1] = array('to', $to, 'int', 0);
@@ -74,7 +82,7 @@ $response['paginas'] = $cantPaginas;
 
 echo json_encode($response);
 
-//para testing
+//Para testing desde el navegador
 //echo "<pre>";
 //print_r('Tipo: ' . $tipo);
 //echo "<pre>";
@@ -86,7 +94,7 @@ echo json_encode($response);
 //echo "<pre>";
 //print_r('SQL: ' . $sql);
 //echo "</pre>";
-//print_r('Paginado: desde->' . $from . ' hasta->' . $to . ' cantida de registros->' . $qty);
+//print_r('Paginado: desde->' . $from . ' hasta->' . $to . ' cantida de registros->' . $qty .' pagina->' . $pagina);
 //echo "</pre>";
 
 ?>
