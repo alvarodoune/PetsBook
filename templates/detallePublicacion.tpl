@@ -92,7 +92,7 @@
                                     data-usuario="{$usuario.id}"
                                     data-id="{$publicacion.id}">Preguntar</button>
                         {else}
-                            <p>Inicie session para preguntar</p>
+                            <a href="login.php">Inicie sesión para preguntar</a>
                         {/if}
                         <div class="preguntas list-group">
                             {foreach from=$preguntas item=preg}
