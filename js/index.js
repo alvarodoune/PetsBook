@@ -138,12 +138,7 @@ function cargarPublicaciones() {
     aplicarFiltro();
 }
 
-<<<<<<< HEAD
-function aplicarFiltro() {
-    // alert('El valor de la cantidad de filas es' + $('#cmbFilas').val());
-=======
 function aplicarFiltro(pagNro) {
->>>>>>> Paginado fix
     $.ajax({
         url: 'filtros.php',
         type: 'POST',
