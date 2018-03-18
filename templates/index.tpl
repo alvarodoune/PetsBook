@@ -83,7 +83,7 @@
                         <h1>Publicaciones</h1>
                         <div class="list-group preguntar" style="color: white">
                             {if (isset($usuario))}
-                                <a class="btn btn-success">
+                                <a href="nuevaPublicacion.php" class="btn btn-success">
                                     Nueva Publicación
                                 </a>
                             {/if}
