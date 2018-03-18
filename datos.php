@@ -39,7 +39,7 @@ function getBarrios() {
 function getPublicaciones() {
 
     $cn = getConexion();
-    $cn->consulta("SELECT * FROM publicaciones LIMIT 10");
+    $cn->consulta("SELECT * FROM publicaciones WHERE exitoso != 1 LIMIT 10");
     $publicaciones = $cn->restantesRegistros();
     $cn->desconectar();
 

@@ -127,7 +127,7 @@ function publicacionesRefresh(datos) {
         fila += ' class="list-group-item list-group-item-action flex-column align-items-start">';
         fila += ' <h5 class="mb-1">' + publicacion['titulo'] + '</h5>';
         fila += ' <div class="d-flex w-100 justify-content-between">';
-        fila += '     <img src="imagenes/publicaciones/' + publicacion['imagen'] + '"';
+        fila += '     <img src="imagenes/publicaciones/' + publicacion['image'] + '"';
         fila += '          class="rounded float-left aspect-ratio"';
         fila += '          alt="' + publicacion['titulo'] + '">';
         fila += '     <small>';

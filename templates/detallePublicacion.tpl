@@ -90,7 +90,7 @@
                                     data-toggle="modal"
                                     data-target="#questionModal" 
                                     data-usuario="{$usuario.id}"
-                                    data-id="{$publicacion.id}">Preguntar</button>
+                                    data-id="{$publicacion.id}">Nueva Pregunta</button>
                         {else}
                             <a href="login.php">Inicie sesión para preguntar</a>
                         {/if}

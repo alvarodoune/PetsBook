@@ -51,6 +51,9 @@ if ($barrio != 0) {
     $sql .= " AND barrio_id = '". $barrio ."'";
 }
 
+$sql .= " AND abierto = 1";
+
+$parametros = array();
 $conn = getConexion();
 $conn->consulta($sql, $parametros);
 $qty = $conn->cantidadRegistros();
