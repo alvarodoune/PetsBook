@@ -87,14 +87,16 @@ function inicializar() {
                         });
                 break;
             case "register":
+                $('#registerSuccessAlert').hide();
+                $('#registerErrorAlert').hide();
                 var formData = {
                     'email': $('input[name=email]').val(),
                     'name': $('input[name=name]').val(),
                     'pass': $('input[name=pass]').val()
                 };
 
-                if (formData.pass != "1234") {
-                    alert("El password debe tener al menos una mayuscula");
+                if (formData.pass.length < 8) {
+                    alert("El password debe tener al menos 8 caracteres");
                 } else {
                     $.ajax({
                         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -105,9 +107,11 @@ function inicializar() {
                     })
                             .done(function (data) {
                                 if (data.success) {
-                                    location.reload();
+                                    $('#registerSuccessAlert').show();
                                     console.log(data);
                                 } else {
+                                    $('#registerErrorAlert').append(data.errors);
+                                    $('#registerErrorAlert').show();
                                     console.error(data.errors);
                                 }
                             });
@@ -128,7 +132,7 @@ function cargarPublicaciones() {
 }
 
 function aplicarFiltro() {
-    alert('El valor de la cantidad de filas es' + $('#cmbFilas').val());
+    // alert('El valor de la cantidad de filas es' + $('#cmbFilas').val());
     $.ajax({
         url: 'filtros.php',
         type: 'POST',

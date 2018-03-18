@@ -15,19 +15,24 @@
         <link href="./libs/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     </head>
     <body>
-        
-{*        {include file="encabezado.tpl"}*}
-        
+
+        {include file="encabezado.tpl"}
+
         <div>
             <form id="register" method="POST" action="doRegister.php">
                 <p>
-                    Email <input type="email" name="email">
+                    Email <input type="email" name="email" title="El email es requerido" required>
                 </p>
                 <p>
-                    Nombre <input type="text" name="name">
+                    Nombre <input type="text" name="name" title="El nombre es requerido" required>
                 </p>
                 <p>
-                    Clave <input type="password" name="pass">
+                    Clave <input type="password"
+                                 name="pass"
+                                 minlength="8"
+                                 required
+                                 pattern="^(?=.*[0-9])(?=.*[a-z])([a-z0-9_-]+)$" 
+                                 title="Debe tener 8 dígitos con al menos una letra y un número.">
                 </p>
                 {if (isset($err))}
                     Usuario/Clave invalidos
@@ -35,7 +40,22 @@
                 <p>
                     <input type="submit" value="Registrarse">
                 </p>
+
+                <div id="registerSuccessAlert" 
+                     class="alert alert-success"
+                     role="alert">
+                    Usuario registrado con éxito!
+                </div>
+
+                <div id="registerErrorAlert" 
+                     class="alert alert-danger"
+                     role="alert">
+                </div>
             </form>
         </div>
+        <script>
+            $('#registerSuccessAlert').hide();
+            $('#registerErrorAlert').hide();
+        </script>
     </body>
 </html>
