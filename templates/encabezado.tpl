@@ -42,6 +42,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./login.php">Iniciar sesion</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="./register.php">Registrarse</a>
+                    </li>
                 {/if}
             </ul>
             <form class="form-inline my-2 my-lg-0">

@@ -180,6 +180,34 @@ function hacerPregunta($id, $pregunta, $usuarioId) {
   tiene harcoded, luego sera desde la base de datos
  */
 
+function register($email, $nombre, $pass) {
+    $db = getConexion();
+
+    $myEmail = mysqli_real_escape_string($email);
+    $name = mysqli_real_escape_string($nombre);
+    $password = mysqli_real_escape_string($pass);
+
+    $sql = "INSERT INTO usuarios (email, nombre, password) VALUES (:email, :name, :password)";
+
+    $db->consulta($sql, array(
+        array('email', $myEmail, 'string'),
+        array('name', $name, 'string'),
+        array('password', $password, 'string')
+    ));
+
+    $lastId = $db->ultimoIdInsert();
+    if ($lastId > 0) {
+        $sqls = "SELECT * FROM usuarios WHERE id = :id";
+
+        $db->consulta($sqls, array(
+            array('id', $lastId, 'int')
+        ));
+        $user = $db->siguienteRegistro();
+    }
+    $db->desconectar();
+    return $user;
+}
+
 function login($usuario, $clave, $recordar) {
     $usuario_logueado = NULL;
     $db = getConexion();

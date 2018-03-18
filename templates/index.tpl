@@ -75,12 +75,22 @@
             <div class="row">
                 <!--<div class="col-3">
                     <div id="divMenuLateral">
-                        {include file="./menuLateral.tpl"}
-                    </div>
-                </div>-->
+                {include file="./menuLateral.tpl"}
+            </div>
+        </div>-->
                 <div class="col-9">
                     <div id="divCategorias">
                         <h1>Publicaciones</h1>
+                        <div class="list-group preguntar">
+                            {if (isset($usuario))}
+                                <button type="button"
+                                        class="btn btn-success"
+                                        data-toggle="modal"
+                                        data-target="#questionModal" 
+                                        data-usuario="{$usuario.id}"
+                                        data-id="{$publicacion.id}">Nueva Pregunta</button>
+                            {/if}
+                        </div>
                         <div class="list-group" id="publicaciones">
                         </div>
                         <select id="cmbFilas">

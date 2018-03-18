@@ -86,13 +86,40 @@ function inicializar() {
                             }
                         });
                 break;
+            case "register":
+                var formData = {
+                    'email': $('input[name=email]').val(),
+                    'name': $('input[name=name]').val(),
+                    'pass': $('input[name=pass]').val()
+                };
+
+                if (formData.pass != "1234") {
+                    alert("El password debe tener al menos una mayuscula");
+                } else {
+                    $.ajax({
+                        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                        url: 'doRegister.php', // the url where we want to POST
+                        data: formData, // our data object
+                        dataType: 'json', // what type of data do we expect back from the server
+                        encode: true
+                    })
+                            .done(function (data) {
+                                if (data.success) {
+                                    location.reload();
+                                    console.log(data);
+                                } else {
+                                    console.error(data.errors);
+                                }
+                            });
+                }
+                break;
         }
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     });
-    
+
     $('#cmbFilas').change(aplicarFiltro);
-    
+
     cargarPublicaciones();
 }
 
@@ -150,7 +177,7 @@ function publicacionesRefresh(datos) {
     }
     for (var i = 0; i < paginas; i++) {
         pagina = i + 1;
-        fila = '<li class="page-item"><a class="page-link" href="#">'+pagina+'</a></li>';
+        fila = '<li class="page-item"><a class="page-link" href="#">' + pagina + '</a></li>';
         $('#paginado').append(fila);
     }
 }
