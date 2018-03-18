@@ -30,13 +30,15 @@ if (!empty($errors)) {
     $data['success'] = false;
     $data['errors'] = $errors;
 } else {
-
     $cont = hacerPregunta($publicacionId, $pregunta, $usuario);
     
     if($cont > 0) {
         $data['success'] = true;
         $data['message'] = 'Success!';  
         $data['cont'] = $cont;
+    } else {
+        $errors['insert'] = 'el insert fallo';
+        $data['errors'] = $errors;
     }
 }
 

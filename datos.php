@@ -164,14 +164,15 @@ function insertarRespuesta($id, $respuesta) {
 
 function hacerPregunta($id, $pregunta, $usuarioId) {
     $cn = getConexion();
-    $cn->consulta("INSERT INTO preguntas (id_publicacion, texto, usuario_id) VALUES = (:id, :pregunta, :usuarioId)", array(
+    $sql = "INSERT INTO preguntas (id_publicacion, texto, usuario_id) VALUES (:id, :pregunta, :usuarioId)";
+    $cn->consulta($sql, array(
         array('id', $id, 'int'),
         array('pregunta', $pregunta, 'string'),
         array('usuarioId', $usuarioId, 'int')
     ));
-    $cont = $cn->cantidadRegistros();
+    $lastId = $cn->ultimoIdInsert();
     $cn->desconectar();
-    return $cont;
+    return $lastId;
 }
 
 /*

@@ -21,13 +21,13 @@ function inicializar() {
         modal.find('.modal-title').text(texto);
         //modal.find('.modal-body input').val(recipient);
     });
-    
+
     $('#questionModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         idPublicacion = button.data('id');
         usuario = button.data('usuario');
         var modal = $(this);
-        modal.find('.modal-title').text("Escribe la pregunta que quieras hacer");
+        modal.find('.questionModalTitle').text("Escribe la pregunta que quieras hacer");
     });
 
     // process the form
@@ -57,18 +57,18 @@ function inicializar() {
                                 location.reload();
                                 console.log(data);
                             } else {
-                                console.error(data.errors[0]);
+                                console.error(data.errors);
                             }
                         });
                 break;
             case "pregunta":
-                
+
                 var formData = {
                     'id': idPublicacion,
                     'usuario': usuario,
                     'pregunta': $('textarea[name=pregunta]').val()
                 };
-                
+
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                     url: 'hacerPregunta.php', // the url where we want to POST
@@ -82,10 +82,10 @@ function inicializar() {
                                 location.reload();
                                 console.log(data);
                             } else {
-                                console.error(data.errors[0]);
+                                console.error(data.errors);
                             }
                         });
-            break;
+                break;
         }
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
