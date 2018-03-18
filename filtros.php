@@ -42,10 +42,13 @@ $response = array();
 
 $sql = "SELECT *";
 $sql .= " FROM publicaciones";
-$sql .= " WHERE (titulo LIKE '%" . $filtro . "%'";
-$sql .= " OR descripcion LIKE '%" . $filtro . "%')";
+$sql .= " WHERE abierto = 1";
 
-if ($tipo != 0) {
+if ($filtro != "") {
+    $sql .= " AND (titulo LIKE '%" . $filtro . "%'";
+    $sql .= " OR descripcion LIKE '%" . $filtro . "%')";
+}
+if ($tipo != "0") {
     $sql .= " AND tipo = '". $tipo ."'";
 }
 if ($especie != 0) {
@@ -58,7 +61,7 @@ if ($barrio != 0) {
     $sql .= " AND barrio_id = '". $barrio ."'";
 }
 
-$sql .= " AND abierto = 1";
+//$sql .= " AND abierto = 1";
 
 $parametros = array();
 $conn = getConexion();

@@ -5,7 +5,9 @@ function inicializar() {
     var idPublicacion;
     var usuario;
 
-    $('#btnFiltrar').click(aplicarFiltro);
+    $('#btnFiltrar').click(function(){
+        aplicarFiltro();
+    });
 //    $(".responderPregunta").click(function ($event) {
 //        var id = $(this).data('id');
 //        alert("Handler for .click() called.");
@@ -123,7 +125,6 @@ function inicializar() {
     });
 
     $('#cmbFilas').change(function(){
-        alert('change???');
         aplicarFiltro();
     });
 
