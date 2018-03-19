@@ -18,7 +18,7 @@
         {include file="encabezado.tpl"}
 
         <div id="nuevaPublicacion" class="col-9">
-            <form method="POST" action="">
+            <form method="POST" action="guardarPublicacion.php" mu>
                 <label>Tipo de publicación</label>
                 <div class="form-check">
                     <input class="form-check-input" 
@@ -46,7 +46,7 @@
                     </label>
                     <select name="especie" class="custom-select mr-sm-2" 
                             id="cboEspecie" required>
-                        <option value="0">Seleccione una especie</option>
+                        <option value="">Seleccione una especie</option>
                         {foreach from=$especies item=e}
                             <option value={$e.id}>{$e.nombre}</option>
                         {/foreach}
@@ -64,34 +64,41 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-check-label" for="barrio">
+                    <label class="form-check-label" for="cboBarrio">
                         Barrio
                     </label>
-                    <select name="barrio" class="custom-select mr-sm-2" id="barrio">
+                    <select name="barrio" class="custom-select mr-sm-2" 
+                            id="cboBarrio" required>
                         {foreach from=$barrios item=b}
                             <option value={$b.id}>{$b.nombre}</option>
                         {/foreach}
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="email">Título</label>
-                    <input type="email"
-                           name="email"
+                    <label for="titulo">Título</label>
+                    <input type="text"
+                           name="titulo"
+                           required
+                           title="El titulo es requerido"
                            class="form-control" 
-                           id="email" aria-describedby="emailHelp" placeholder="Ingrese el título">
-                    <small id="emailHelp" class="form-text text-muted">Sea breve y conciso.</small>
+                           id="titulo" 
+                           aria-describedby="titleHelp" placeholder="Ingrese el título">
+                    <small id="titleHelp" class="form-text text-muted">Sea breve y conciso.</small>
                 </div>
                 <div class="form-group">
-                    <label for="password">Descripción</label>
+                    <label for="desc">Descripción</label>
                     <textarea
-                        name="descripcion"
+                        name="desc"
+                        required
                         class="form-control" 
-                        id="descripcion" 
+                        title="La descripcion es requerida"
+                        id="desc" 
                         placeholder="Ingrese la descripción"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="password">Foto principal</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <label for="imagen">Foto principal</label>
+                    <input type="file" 
+                           required class="form-control-file" id="imagen">
                     <small class="form-text text-muted">Luego podrá agregar todas las fotos necesarias.</small>
                 </div>
                 <div class="form-group">

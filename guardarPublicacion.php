@@ -1,20 +1,22 @@
 <?php
 require_once 'datos.php';
 
-$nombre = $_POST['nombre'];
-$descripcion = $_POST['descripcion'];
-$catId = $_POST['catId'];
-$id = guardarProducto($nombre, $descripcion, $catId);
+$especie = $_POST['especie'];
+$raza = $_POST['raza'];
+$barrio = $_POST['barrio'];
+$titulo = $_POST['titulo'];
+//$imagen = $_POST['imagen'];
 
 // ver si vino foto
-$foto = $_FILES['imagen'];
-if(isset($foto)) {
-    $temporal = $foto['tmp_name'];
+$imagen = $_FILES['imagen'];
+
+if(isset($imagen)) {
+    $temporal = $imagen['tmp_name'];
     $nuevo = "./imagenes/$id";
     move_uploaded_file($temporal, $nuevo );
 }
-// si vino foto, guardarla con el id como nombre
 
+echo json_encode($imagen);
 
-header('location:index.php?cat=' . $catId);
+//header('location:index.php?cat=' . $catId);
 
