@@ -12,6 +12,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="./js/index.js"></script>
+        <script src="./js/detallePublicacion.js"></script>
         <link href="./libs/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     </head>
 
@@ -38,7 +39,6 @@
                         {else}
                             <h3 class="text-danger">PERDIDO</h3>
                         {/if}
-
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -81,6 +81,8 @@
                             </p>
                             <small>Fecha de publicación: {$publicacion.fechaPublicado}</small>
                         </div>
+                        <a type="button" class="btn btn-outline-secondary" href="imprimir.php" target="_blank">Imprimir</a>
+                        <!--<button type="button" class="btn btn-outline-secondary" id="print">Imprimir</button>-->
                     </div>
 
                     <div class="list-group preguntar">
