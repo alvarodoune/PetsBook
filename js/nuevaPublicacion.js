@@ -14,34 +14,34 @@ function inicializar() {
         }
     });
 
-    $('form').submit(function (event) {
-        event.preventDefault();
-        var file_data = $('#imagen').prop('files')[0];
-
-        var formData = {
-//            'tipo': $('input[name=tipo]').val(),
-//            'especie': $('#cboEspecie').val(),
-//            'raza': $('#cboRaza').val(),
-//            'barrio': $('#cboBarrio').val(),
-//            'titulo': $('#titulo').val(),
-//            'desc': $('#desc').val(),
-            'imagen': file_data
-        };
-
-        console.log(formData);
-
-        $.ajax({
-            url: 'guardarPublicacion.php',
-            type: 'POST',
-            dataType: 'text',
-            data: formData,
-            processData: false,
-            cache: false,
-            contentType: false,
-        }).done(function (data) {
-            console.log(data);
-        });
-    });
+//    $('form').submit(function (event) {
+//        event.preventDefault();
+//        var file_data = $('#imagen').prop('files')[0];
+//
+//        var formData = {
+////            'tipo': $('input[name=tipo]').val(),
+////            'especie': $('#cboEspecie').val(),
+////            'raza': $('#cboRaza').val(),
+////            'barrio': $('#cboBarrio').val(),
+////            'titulo': $('#titulo').val(),
+////            'desc': $('#desc').val(),
+//            'imagen': file_data
+//        };
+//
+//        console.log(formData);
+//
+//        $.ajax({
+//            url: 'guardarPublicacion.php',
+//            type: 'POST',
+//            dataType: 'text',
+//            data: formData,
+//            processData: false,
+//            cache: false,
+//            contentType: false,
+//        }).done(function (data) {
+//            console.log(data);
+//        });
+//    });
 }
 
 function reloadRazas(especie) {
