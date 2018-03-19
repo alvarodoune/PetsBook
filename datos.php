@@ -83,13 +83,28 @@ function getImagenesPublicacion($pubId) {
     return $pub;
 }
 
-function guardarPublicacion($tit, $desc) {
+function guardarPublicacion($desc, $tipo, $especie, $raza, $barrio, $titulo, $imagen, $usuario) {
     $cn = getConexion();
-    $cn->consulta("INSERT INTO publicaciones(titulo, descripcion) VALUES(:tit, :desc)", array(
-        array('titulo', $tit, 'string'),
-        array('descricion', $desc, 'string')
+    $sql = "INSERT INTO "
+            . "publicaciones(titulo, descripcion, image, tipo, especie_id, raza_id, barrio_id, abierto, fechaPublicado, usuario_id, exitoso) "
+            . "VALUES(:titulo, :descripcion, :image, :tipo, :especie, :raza, :barrio, :abierto, :fecha, :usuario, :exitoso)";
+
+    $cn->consulta($sql, array(
+        array('titulo', $titulo, 'string'),
+        array('descripcion', $desc, 'string'),
+        array('image', $imagen, 'string'),
+        array('tipo', $tipo, 'string'),
+        array('especie', $especie, 'int'),
+        array('raza', $raza, 'int'),
+        array('barrio', $barrio, 'int'),
+        array('abierto', 1, 'int'),
+        array('fecha', date('Y-m-d'), 'string'),
+        array('usuario', $usuario, 'int'),
+        array('exitoso', 0, 'int')
     ));
+    $id = $cn->ultimoIdInsert();
     $cn->desconectar();
+    return $id;
 }
 
 function getProductos($catId, $pagina = 1) {
