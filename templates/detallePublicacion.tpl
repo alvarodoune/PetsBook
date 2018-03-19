@@ -81,7 +81,7 @@
                             </p>
                             <small>Fecha de publicación: {$publicacion.fechaPublicado}</small>
                         </div>
-                        <a type="button" class="btn btn-outline-secondary" href="imprimir.php" target="_blank">Imprimir</a>
+                        <a type="button" class="btn btn-outline-secondary" href="imprimir.php?id={$publicacion.id}" target="_blank">Imprimir</a>
                         <!--<button type="button" class="btn btn-outline-secondary" id="print">Imprimir</button>-->
                     </div>
 
