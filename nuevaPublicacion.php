@@ -7,6 +7,8 @@ if(!isset($usuario)) {
     header('location:login.php');
 } else {
     $miSmarty = nuevoSmarty();
-    // $miSmarty->assign("publicaciones", getPublicaciones());
+    $miSmarty->assign("especies", getEspecies());
+    //$miSmarty->assign("razas", getRazas());
+    $miSmarty->assign("barrios", getBarrios());
     $miSmarty->display('nuevaPublicacion.tpl');
 }
