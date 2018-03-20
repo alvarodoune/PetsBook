@@ -107,6 +107,21 @@ function guardarPublicacion($desc, $tipo, $especie, $raza, $barrio, $titulo, $im
     return $id;
 }
 
+function insertarImagen($idPub, $image) {
+    $cn = getConexion();
+    $sql = "INSERT INTO "
+            . "imagenes(id_publicacion, image) "
+            . "VALUES(:id, :image)";
+
+    $cn->consulta($sql, array(
+        array('id', $idPub, 'int'),
+        array('image', $image, 'string'),
+    ));
+    $id = $cn->ultimoIdInsert();
+    $cn->desconectar();
+    return $id;
+}
+
 function getProductos($catId, $pagina = 1) {
 
     $porPagina = 3;

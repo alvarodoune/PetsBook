@@ -102,7 +102,16 @@
                            required 
                            class="form-control-file" 
                            id="imagen">
-                    <small class="form-text text-muted">Luego podrá agregar todas las fotos necesarias.</small>
+                    <small class="form-text text-muted">Esta imagen aparecerá de portada.</small>
+                </div>
+                <div class="form-group">
+                    <label for="imagen">Mas fotos</label>
+                    <input name="upload[]" 
+                           type="file"
+                           multiple="multiple"
+                           class="form-control-file" 
+                           id="upload">
+                    <small class="form-text text-muted">Puede subir tantas fotos opcionales como desee.</small>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Crear</button>
