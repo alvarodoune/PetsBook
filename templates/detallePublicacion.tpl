@@ -17,6 +17,12 @@
     </head>
 
     <body>
+        {if $publicacion.abierto == "0" || $publicacion.abierto == NULL}
+            <div class="alert alert-danger" role="alert">
+                Publicación Cerrada!
+            </div>
+        {/if}
+
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -26,12 +32,18 @@
                 </div>
             </div>
             <div class="row">
-                {*<div class="col-3">
-                <div id="divMenuLateral">
-                {include file="./menuLateral.tpl"}
+                <div class="col-12" style="text-align: center; padding: 10px">
+                    {if (isset($usuario) && $usuario.id === $publicacion.usuario_id)}
+                        <button type="button"
+                                class="btn btn-danger"
+                                data-toggle="modal"
+                                data-target="#closeModal" 
+                                data-usuario="{$usuario.id}"
+                                data-id="{$publicacion.id}">Cerrar publicacion</button>
+                    {/if}
                 </div>
-                </div>*}
-
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <div id="divCategorias">
                         {if $publicacion.tipo == "E"}
@@ -127,7 +139,7 @@
                     </div>
                 </div>
 
-            <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -185,7 +197,56 @@
                             </form>
                         </div>
                     </div>
-                </div>     
+                </div>    
+
+                <div class="modal fade" id="closeModal" 
+                     tabindex="-1" 
+                     role="dialog" 
+                     aria-labelledby="closeModalLabel" 
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="questionModalTitle">Cerrar</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form name="cerrar" 
+                                  id="cerrar" 
+                                  action="cerrarPublicacion.php" 
+                                  method="POST">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Antes de cerrar la publicación por favor indique si lo encontro:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" 
+                                                   type="radio" 
+                                                   name="exitoso" 
+                                                   id="optionSi" 
+                                                   value="1" checked>
+                                            <label class="form-check-label" for="optionSi">
+                                                Si, gracias!
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" 
+                                                   type="radio" 
+                                                   name="exitoso" id="optionNo" value="0">
+                                            <label class="form-check-label" for="optionNo">
+                                                No, lamentablemente.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> 
             </div>
 
             {*           <div id="answerSuccessAlert" class="alert alert-success" data-dismiss="alert" role="alert">

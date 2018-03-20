@@ -181,6 +181,18 @@ function guardarProducto($nombre, $descripcion, $catId) {
     return $id;
 }
 
+function closePub($idPub, $exitoso) {
+    $cn = getConexion();
+    $sql = "UPDATE publicaciones SET abierto = 0, exitoso = :exitoso WHERE id = :id";
+    $cn->consulta($sql, array(
+        array('exitoso', $exitoso, 'int'),
+        array('id', $idPub, 'int')
+    ));
+    $cont = $cn->cantidadRegistros();
+    $cn->desconectar();
+    return $cont;
+}
+
 function insertarRespuesta($id, $respuesta) {
     $cn = getConexion();
     $cn->consulta("UPDATE preguntas SET respuesta = :respuesta WHERE id = :id", array(

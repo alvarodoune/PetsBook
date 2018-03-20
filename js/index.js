@@ -5,7 +5,7 @@ function inicializar() {
     var idPublicacion;
     var usuario;
 
-    $('#btnFiltrar').click(function(){
+    $('#btnFiltrar').click(function () {
         aplicarFiltro();
     });
 //    $(".responderPregunta").click(function ($event) {
@@ -31,6 +31,15 @@ function inicializar() {
         var modal = $(this);
         modal.find('.questionModalTitle').text("Escribe la pregunta que quieras hacer");
     });
+
+    $('#closeModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        idPublicacion = button.data('id');
+        usuario = button.data('usuario');
+        var modal = $(this);
+        //modal.find('.questionModalTitle').text("Escribe la pregunta que quieras hacer");
+    });
+    //exitoso
 
     // process the form
     $('form').submit(function (event) {
@@ -119,18 +128,42 @@ function inicializar() {
                             });
                 }
                 break;
+            case "cerrar":
+                var formData = {
+                    'idPub': idPublicacion,
+                    'usuario': usuario,
+                    'exitoso': $('input[name=exitoso]').val()
+                };
+                
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: 'doClose.php', // the url where we want to POST
+                    data: formData, // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        .done(function (data) {
+                            if (data.success) {
+                                
+                                console.log(data);
+                            } else {
+                                
+                                console.error(data.errors);
+                            }
+                        });
+                break;
         }
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     });
 
-    $('#cmbFilas').change(function(){
+    $('#cmbFilas').change(function () {
         aplicarFiltro();
     });
 
     cargarPublicaciones();
-    
-    $('#paginado').on('click', '.page-item', function(e){
+
+    $('#paginado').on('click', '.page-item', function (e) {
         aplicarFiltro($(this).attr('attr'));
     });
 }
@@ -190,7 +223,7 @@ function publicacionesRefresh(datos) {
     //Paginado
     for (var i = 0; i < paginas; i++) {
         pagina = i + 1;
-        fila = '<li class="page-item" attr="'+pagina+'"><a class="page-link" href="#">' + pagina + '</a></li>';
+        fila = '<li class="page-item" attr="' + pagina + '"><a class="page-link" href="#">' + pagina + '</a></li>';
         $('#paginado').append(fila);
     }
 }
