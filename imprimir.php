@@ -9,26 +9,34 @@ require_once './datos.php';
 require_once 'fpdf/fpdf.php';
 
 $id = $_GET['id'];
-
-$sql = "SELECT * FROM publicaciones WHERE id = :id";
-$parametros = array();
-$parametros[0] = array('id', $id, 'int', 0);
-
-$conn = getConexion();
-$conn->consulta($sql, $parametros);
-
-$result = $conn->siguienteRegistro();
+$data = getPublicacion($id);
+$images = getImagenesPublicacion($id);
 
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(40,10,'Detalle de la publicacion');
+$pdf->Ln();
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(40,20,'Publicacion nro: ' . $id);
-$pdf->Cell(40,30,'Raza: ' . $result['raza_id']);
-$pdf->Cell(40,40,'Especie: ' . $result['especie_id']);
-$pdf->Cell(40,50,'Descrpcion: ' . $result['descripcion']);
+$pdf->Cell(40,10,'Publicacion nro: ' . $id);
+$pdf->Ln();
+$pdf->Cell(40,10,'Fecha de publicacion: ' . $data['fechaPublicado']);
+$pdf->Ln();
+$pdf->Cell(40,10,'Raza: ' . $data['raza']);
+$pdf->Ln();
+$pdf->Cell(40,10,'Especie: ' . $data['especie']);
+$pdf->Ln();
+$pdf->Cell(40,10, 'Descripcion:');
+$pdf->Ln();
+$pdf->MultiCell(0,5,$data['descripcion']);
+$pdf->Ln();
+$pdf->Cell(40,10,'Imagenes de la publicacion:');
+$pdf->Ln();
+foreach ($images as $image){
+    $pdf->Image('imagenes/publicaciones/' . $image['image'], $x, $y, 50, 50);
+    $pdf->Ln();
+}
 
 $pdf->Output();
 
