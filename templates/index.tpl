@@ -80,7 +80,7 @@
         </div>-->
                 <div class="col-12">
                     <div id="divCategorias">
-                        <h1>Publicaciones</h1>
+                        <h1>Publicaciones abiertas</h1>
                         <div class="list-group preguntar" style="color: white">
                             {if (isset($usuario))}
                                 <a href="nuevaPublicacion.php" class="btn btn-success">

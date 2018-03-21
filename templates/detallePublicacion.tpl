@@ -14,6 +14,12 @@
         <script src="./js/index.js"></script>
         <script src="./js/detallePublicacion.js"></script>
         <link href="./libs/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+        <style>
+            #map {
+                height: 400px;
+                width: 100%;
+            }
+        </style>
     </head>
 
     <body>
@@ -97,7 +103,18 @@
                                 {$publicacion.descripcion}
                             </p>
                             <small>Fecha de publicación: {$publicacion.fechaPublicado}</small>
+                            <br>
+                            {if $publicacion.latitud && $publicacion.longitud}
+                                <h3>Hubícalo en el mapa</h3>
+                                <div id="map"></div>
+                                <div id="lat" class="noVisible">{$publicacion.latitud}</div>
+                                <div id="lon" class="noVisible">{$publicacion.longitud}</div>
+                                <script async defer
+                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD01D0EbO2sskocLLV5Q0_s5c_FiR4qA1k&callback=initMap">
+                                </script>
+                            {/if}
                         </div>
+                        <br>
                         <a type="button" class="btn btn-outline-secondary" href="imprimir.php?id={$publicacion.id}" target="_blank">Imprimir</a>
                         <!--<button type="button" class="btn btn-outline-secondary" id="print">Imprimir</button>-->
                     </div>

@@ -5,8 +5,11 @@
  */
 $(document).ready(inicializar);
 
-function inicializar(){
-    $('#print').click(function(){
+var lat;
+var lon;
+
+function inicializar() {
+    $('#print').click(function () {
         $.ajax({
             url: 'imprimir.php',
             type: 'POST',
@@ -16,3 +19,24 @@ function inicializar(){
     });
 }
 
+function initMap() {
+    lat = $('#lat').html();
+    lon = $('#lon').html();
+
+    if (lat && lon) {
+        setTimeout(loadMap, 500);
+    }
+}
+
+function loadMap() {
+    //var uluru = {lat: -34.8494129, lng: -55.9971745};
+    var uluru = {lat: +lat, lng: +lon};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: uluru
+    });
+    var marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+    });
+}

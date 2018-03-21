@@ -19,6 +19,10 @@
     margin: auto;
 }
 
+.noVisible {
+    visibility: hidden;
+}
+
 #divContenidoCompleto {
 
 }
