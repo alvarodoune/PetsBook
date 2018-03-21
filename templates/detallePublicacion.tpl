@@ -104,7 +104,7 @@
                             </p>
                             <small>Fecha de publicación: {$publicacion.fechaPublicado}</small>
                             <br>
-                            {if $publicacion.latitud && $publicacion.longitud}
+                            {if $publicacion.latitud != 0 && $publicacion.longitud != 0}
                                 <h3>Ubícalo en el mapa</h3>
                                 <div id="map"></div>
                                 <div id="lat" class="noVisible">{$publicacion.latitud}</div>

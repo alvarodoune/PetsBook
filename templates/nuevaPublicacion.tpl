@@ -125,7 +125,7 @@
                     <small class="form-text text-muted">Puede subir tantas fotos opcionales como desee.</small>
                 </div>
 
-                <h3>Opcionalmente puede seleccionar la ubicación</h3>
+                <h6>Opcionalmente puede seleccionar la ubicación haciendo click en el mapa</h6>
                 <div id="map"></div>
                 <script async defer
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD01D0EbO2sskocLLV5Q0_s5c_FiR4qA1k&callback=initMap">
