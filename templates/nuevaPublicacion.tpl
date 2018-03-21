@@ -12,6 +12,15 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="./js/nuevaPublicacion.js"></script>
         <link href="./libs/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                height: 400px;
+                width: 100%;
+            }
+        </style>
     </head>
     <body>
 
@@ -19,6 +28,8 @@
 
         <div id="nuevaPublicacion" class="col-9">
             <form method="POST" action="guardarPublicacion.php" enctype="multipart/form-data">
+                <input id="lat" type="hidden" name="lat" value="">
+                <input id="lon" type="hidden" name="lon" value="">
                 <label>Tipo de publicación</label>
                 <div class="form-check">
                     <input class="form-check-input" 
@@ -113,6 +124,13 @@
                            id="upload">
                     <small class="form-text text-muted">Puede subir tantas fotos opcionales como desee.</small>
                 </div>
+
+                <h3>Opcionalmente puede seleccionar la ubicación</h3>
+                <div id="map"></div>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD01D0EbO2sskocLLV5Q0_s5c_FiR4qA1k&callback=initMap">
+                </script>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </div>

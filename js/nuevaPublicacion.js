@@ -14,33 +14,46 @@ function inicializar() {
         }
     });
 
-//    $('form').submit(function (event) {
-//        event.preventDefault();
-//        var file_data = $('#imagen').prop('files')[0];
-//
-//        var formData = {
-////            'tipo': $('input[name=tipo]').val(),
-////            'especie': $('#cboEspecie').val(),
-////            'raza': $('#cboRaza').val(),
-////            'barrio': $('#cboBarrio').val(),
-////            'titulo': $('#titulo').val(),
-////            'desc': $('#desc').val(),
-//            'imagen': file_data
-//        };
-//
-//        console.log(formData);
-//
-//        $.ajax({
-//            url: 'guardarPublicacion.php',
-//            type: 'POST',
-//            dataType: 'text',
-//            data: formData,
-//            processData: false,
-//            cache: false,
-//            contentType: false,
-//        }).done(function (data) {
-//            console.log(data);
-//        });
+
+}
+
+function initMap() {
+    var myLatlng = {lat: -34.921839612207584, lng: -56.16119127106231};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: myLatlng
+    });
+
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Lugar del acontecimiento'
+    });
+
+    //Add listener
+    map.addListener("click", function (event) {
+        var latitude = event.latLng.lat();
+        var longitude = event.latLng.lng();
+        var pLatlng = {lat: latitude, lng: longitude};
+        
+        $('#lat').val(latitude);
+        $('#lon').val(longitude);
+
+        marker.setPosition(pLatlng);
+    });
+
+//    map.addListener('center_changed', function () {
+//        // 3 seconds after the center of the map has changed, pan back to the
+//        // marker.
+//        window.setTimeout(function () {
+//            map.panTo(marker.getPosition());
+//        }, 3000);
+//    });
+
+//    marker.addListener('click', function () {
+//        map.setZoom(8);
+//        map.setCenter(marker.getPosition());
 //    });
 }
 

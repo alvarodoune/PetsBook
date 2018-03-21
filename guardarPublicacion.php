@@ -9,6 +9,8 @@ $raza = $_POST['raza'];
 $barrio = $_POST['barrio'];
 $titulo = $_POST['titulo'];
 $imagen = $_FILES['imagen'];
+$lat = $_POST['lat'];
+$lon = $_POST['lon'];
 $usuario = getUsuarioLogueado();
 
 if (is_uploaded_file($imagen['tmp_name'])) {
@@ -16,7 +18,7 @@ if (is_uploaded_file($imagen['tmp_name'])) {
     if (move_uploaded_file($imagen['tmp_name'], $nuevoNombre)) {
         $usuFoto = $nuevoNombre;
         // hacer el insert de la publicacion en la base
-        $id = guardarPublicacion($desc, $tipo, $especie, $raza, $barrio, $titulo, $imagen['name'], $usuario['id']);
+        $id = guardarPublicacion($desc, $tipo, $especie, $raza, $barrio, $titulo, $imagen['name'], $usuario['id'], $lat, $lon);
 
         if ($id > 0) {
             // si tengo mas fotos opcionales

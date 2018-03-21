@@ -83,11 +83,11 @@ function getImagenesPublicacion($pubId) {
     return $pub;
 }
 
-function guardarPublicacion($desc, $tipo, $especie, $raza, $barrio, $titulo, $imagen, $usuario) {
+function guardarPublicacion($desc, $tipo, $especie, $raza, $barrio, $titulo, $imagen, $usuario, $lat, $lon) {
     $cn = getConexion();
     $sql = "INSERT INTO "
-            . "publicaciones(titulo, descripcion, image, tipo, especie_id, raza_id, barrio_id, abierto, fechaPublicado, usuario_id, exitoso) "
-            . "VALUES(:titulo, :descripcion, :image, :tipo, :especie, :raza, :barrio, :abierto, :fecha, :usuario, :exitoso)";
+            . "publicaciones(titulo, descripcion, image, tipo, especie_id, raza_id, barrio_id, abierto, fechaPublicado, usuario_id, exitoso, latitud, longitud) "
+            . "VALUES(:titulo, :descripcion, :image, :tipo, :especie, :raza, :barrio, :abierto, :fecha, :usuario, :exitoso, :lat, :lon)";
 
     $cn->consulta($sql, array(
         array('titulo', $titulo, 'string'),
@@ -100,7 +100,9 @@ function guardarPublicacion($desc, $tipo, $especie, $raza, $barrio, $titulo, $im
         array('abierto', 1, 'int'),
         array('fecha', date('Y-m-d'), 'string'),
         array('usuario', $usuario, 'int'),
-        array('exitoso', 0, 'int')
+        array('exitoso', 0, 'int'),
+        array('lat', $lat, 'int'),
+        array('lon', $lon, 'int')
     ));
     $id = $cn->ultimoIdInsert();
     $cn->desconectar();
@@ -268,7 +270,7 @@ function getUsuarioLogueado() {
     return $usuario;
 }
 
-function getQtyPublicaciones(){
+function getQtyPublicaciones() {
     $conn = getConexion();
     $conn->consulta("SELECT count(*) AS qty FROM publicaciones");
     $result = $conn->siguienteRegistro();
@@ -277,7 +279,7 @@ function getQtyPublicaciones(){
     return $result;
 }
 
-function getQtyPublicacionesXTipo(){
+function getQtyPublicacionesXTipo() {
     $conn = getConexion();
     $conn->consulta("SELECT count(*) AS qty, tipo FROM publicaciones GROUP BY tipo");
     $result = $conn->restantesRegistros();
@@ -286,7 +288,7 @@ function getQtyPublicacionesXTipo(){
     return $result;
 }
 
-function getQtyPublicacionesXEspecie(){
+function getQtyPublicacionesXEspecie() {
     $conn = getConexion();
     $conn->consulta("SELECT count(*) AS qty, especie_id, e.nombre AS especie"
             . " FROM publicaciones"
@@ -298,7 +300,7 @@ function getQtyPublicacionesXEspecie(){
     return $result;
 }
 
-function getQtyPublicacionesXEstado(){
+function getQtyPublicacionesXEstado() {
     $conn = getConexion();
     $conn->consulta("SELECT count(*) AS qty, abierto FROM publicaciones GROUP BY abierto");
     $result = $conn->restantesRegistros();
@@ -307,7 +309,7 @@ function getQtyPublicacionesXEstado(){
     return $result;
 }
 
-function getQtyPublicacionesXResultado(){
+function getQtyPublicacionesXResultado() {
     $conn = getConexion();
     $conn->consulta("SELECT count( * ) AS qty, exitoso "
             . "FROM publicaciones "
