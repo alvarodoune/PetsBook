@@ -22,6 +22,11 @@
                 Publicación Cerrada!
             </div>
         {/if}
+        {if $publicacion.exitoso == "1"}
+            <div class="alert alert-success" role="alert">
+                Otro caso de éxito donde se ha reencontrado con sus dueños!
+            </div>
+        {/if}
 
         <div class="container">
             <div class="row">
