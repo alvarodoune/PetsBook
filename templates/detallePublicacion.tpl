@@ -33,7 +33,7 @@
             </div>
             <div class="row">
                 <div class="col-12" style="text-align: center; padding: 10px">
-                    {if (isset($usuario) && $usuario.id === $publicacion.usuario_id)}
+                    {if (isset($usuario) && $usuario.id === $publicacion.usuario_id && $publicacion.abierto == "1")}
                         <button type="button"
                                 class="btn btn-danger"
                                 data-toggle="modal"
@@ -97,46 +97,48 @@
                         <!--<button type="button" class="btn btn-outline-secondary" id="print">Imprimir</button>-->
                     </div>
 
-                    <div class="list-group preguntar">
-                        {if (isset($usuario))}
-                            <button type="button"
-                                    class="btn btn-success"
-                                    data-toggle="modal"
-                                    data-target="#questionModal" 
-                                    data-usuario="{$usuario.id}"
-                                    data-id="{$publicacion.id}">Nueva Pregunta</button>
-                        {else}
-                            <a href="login.php">Inicie sesión para preguntar</a>
-                        {/if}
-                        <div class="preguntas list-group">
-                            {foreach from=$preguntas item=preg}
-                                <div class="card col-12">
-                                    <div class="card-body">                            
-                                        <h5 class="card-title">{$preg.usuario}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"></h6>
-                                        <div class="alert alert-primary text-left" role="alert">
-                                            <p class="card-text">{$preg.texto}</p>
-                                        </div>
-                                        {if $preg.respuesta != ""}
-                                            <div class="alert alert-dark text-right" role="alert">
-                                                <p class="card-text">{$preg.respuesta}</p>
+                    {if $publicacion.abierto == "1"}
+                        <div class="list-group preguntar">
+                            {if (isset($usuario))}
+                                <button type="button"
+                                        class="btn btn-success"
+                                        data-toggle="modal"
+                                        data-target="#questionModal" 
+                                        data-usuario="{$usuario.id}"
+                                        data-id="{$publicacion.id}">Nueva Pregunta</button>
+                            {else}
+                                <a href="login.php">Inicie sesión para preguntar</a>
+                            {/if}
+                            <div class="preguntas list-group">
+                                {foreach from=$preguntas item=preg}
+                                    <div class="card col-12">
+                                        <div class="card-body">                            
+                                            <h5 class="card-title">{$preg.usuario}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted"></h6>
+                                            <div class="alert alert-primary text-left" role="alert">
+                                                <p class="card-text">{$preg.texto}</p>
                                             </div>
-                                        {else}
-                                            {if (isset($usuario) && $usuario.id == $publicacion.usuario_id)}
-                                                <button type="button" 
-                                                        class="btn btn-primary" 
-                                                        data-toggle="modal"
-                                                        data-preg="{$preg.texto}"
-                                                        data-target="#answerModal" 
-                                                        data-id="{$preg.id}"
-                                                        >Responder</button>
+                                            {if $preg.respuesta != ""}
+                                                <div class="alert alert-dark text-right" role="alert">
+                                                    <p class="card-text">{$preg.respuesta}</p>
+                                                </div>
+                                            {else}
+                                                {if (isset($usuario) && $usuario.id == $publicacion.usuario_id)}
+                                                    <button type="button" 
+                                                            class="btn btn-primary" 
+                                                            data-toggle="modal"
+                                                            data-preg="{$preg.texto}"
+                                                            data-target="#answerModal" 
+                                                            data-id="{$preg.id}"
+                                                            >Responder</button>
+                                                {/if}
                                             {/if}
-                                        {/if}
+                                        </div>
                                     </div>
-                                </div>
-                            {/foreach}
+                                {/foreach}
+                            </div>
                         </div>
-                    </div>
+                    {/if}
                 </div>
 
                 <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -232,7 +234,9 @@
                                         <div class="form-check">
                                             <input class="form-check-input" 
                                                    type="radio" 
-                                                   name="exitoso" id="optionNo" value="0">
+                                                   name="exitoso" 
+                                                   id="optionNo" 
+                                                   value="0">
                                             <label class="form-check-label" for="optionNo">
                                                 No, lamentablemente.
                                             </label>

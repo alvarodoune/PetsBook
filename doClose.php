@@ -12,10 +12,6 @@ if (empty($idPub)) {
     $errors['id'] = 'El id es requerido.';
 }
 
-if (empty($exitoso)) {
-    $errors['exitoso'] = 'El estado es requerido.';
-}
-
 if (!empty($errors)) {
     $data['success'] = false;
     $data['errors'] = $errors;

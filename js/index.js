@@ -132,7 +132,7 @@ function inicializar() {
                 var formData = {
                     'idPub': idPublicacion,
                     'usuario': usuario,
-                    'exitoso': $('input[name=exitoso]').val()
+                    'exitoso': $('input[name=exitoso]:checked').val()
                 };
                 
                 $.ajax({
@@ -144,7 +144,8 @@ function inicializar() {
                 })
                         .done(function (data) {
                             if (data.success) {
-                                
+                                $('#closeModal').modal('hide');
+                                location.reload();
                                 console.log(data);
                             } else {
                                 
