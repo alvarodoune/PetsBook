@@ -35,11 +35,11 @@
                     </div>
                 </li>
                 {if (isset($usuario))}
+                    <li>
+                        <a class="nav-link text-success" href="./estadisticas.php">Estadisticas</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" href="./doLogout.php">Salir</a>
-                    </li>
-                    <li>
-                        <a class="nav-link text-danger" href="./estadisticas.php">Estadisticas</a>
                     </li>
                 {else}
                     <li class="nav-item">
