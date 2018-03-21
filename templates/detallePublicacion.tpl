@@ -260,5 +260,6 @@
             <script>
             $("#answerSuccessAlert").hide();
             </script>*}
+        </div>
     </body>
 </html>

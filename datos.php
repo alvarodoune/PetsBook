@@ -327,6 +327,57 @@ function getUsuarioLogueado() {
     return $usuario;
 }
 
+function getQtyPublicaciones(){
+    $conn = getConexion();
+    $conn->consulta("SELECT count(*) AS qty FROM publicaciones");
+    $result = $conn->siguienteRegistro();
+    $conn->desconectar();
+
+    return $result;
+}
+
+function getQtyPublicacionesXTipo(){
+    $conn = getConexion();
+    $conn->consulta("SELECT count(*) AS qty, tipo FROM publicaciones GROUP BY tipo");
+    $result = $conn->restantesRegistros();
+    $conn->desconectar();
+
+    return $result;
+}
+
+function getQtyPublicacionesXEspecie(){
+    $conn = getConexion();
+    $conn->consulta("SELECT count(*) AS qty, especie_id, e.nombre AS especie"
+            . " FROM publicaciones"
+            . " INNER JOIN especies e ON especie_id = e.id"
+            . " GROUP BY especie_id");
+    $result = $conn->restantesRegistros();
+    $conn->desconectar();
+
+    return $result;
+}
+
+function getQtyPublicacionesXEstado(){
+    $conn = getConexion();
+    $conn->consulta("SELECT count(*) AS qty, abierto FROM publicaciones GROUP BY abierto");
+    $result = $conn->restantesRegistros();
+    $conn->desconectar();
+
+    return $result;
+}
+
+function getQtyPublicacionesXResultado(){
+    $conn = getConexion();
+    $conn->consulta("SELECT count( * ) AS qty, exitoso "
+            . "FROM publicaciones "
+            . "WHERE exitoso IN ( 1, 0 ) "
+            . "GROUP BY exitoso");
+    $result = $conn->restantesRegistros();
+    $conn->desconectar();
+
+    return $result;
+}
+
 // Crea un objeto de smarty, lo configura
 // y lo devuelve
 function nuevoSmarty() {
