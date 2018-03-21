@@ -122,65 +122,6 @@ function insertarImagen($idPub, $image) {
     return $id;
 }
 
-function getProductos($catId, $pagina = 1) {
-
-    $porPagina = 3;
-    $desde = ($pagina - 1) * $porPagina;
-
-    $cn = getConexion();
-    $cn->consulta("
-        SELECT count(*) as total 
-        FROM productos
-        WHERE id_categoria = :catId 
-        ", array(
-        array('catId', $catId, 'int')
-    ));
-
-    $total = $cn->siguienteRegistro()['total'] / $porPagina;
-
-    $cn->consulta("
-            SELECT * FROM productos 
-            WHERE id_categoria = :catId 
-            LIMIT :desde, :cantidad
-            ", array(
-        array('catId', $catId, 'int'),
-        array('desde', $desde, 'int'),
-        array('cantidad', $porPagina, 'int'),
-    ));
-    $productos = $cn->restantesRegistros();
-    $cn->desconectar();
-
-    return array(
-        'total' => $total,
-        'objetos' => $productos
-    );
-}
-
-// obtiene un producto por id
-function getProducto($id) {
-    $producto = null;
-    foreach (getPublicaciones() as $publicacion) {
-        foreach (getProductos($publicacion['id']) as $aux) {
-            if ($aux['id'] == $id) {
-                $producto = $aux;
-            }
-        }
-    }
-    return $producto;
-}
-
-function guardarProducto($nombre, $descripcion, $catId) {
-    $cn = getConexion();
-    $cn->consulta("INSERT INTO productos(nombre, descripcion, id_categoria) VALUES(:nombre, :descripcion, :catId)", array(
-        array('nombre', $nombre, 'string'),
-        array('descripcion', $descripcion, 'string'),
-        array('catId', $catId, 'int')
-    ));
-    $id = $cn->ultimoIdInsert();
-    $cn->desconectar();
-    return $id;
-}
-
 function closePub($idPub, $exitoso) {
     $cn = getConexion();
     $sql = "UPDATE publicaciones SET abierto = 0, exitoso = :exitoso WHERE id = :id";
