@@ -38,6 +38,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-danger" href="./doLogout.php">Salir</a>
                     </li>
+                    <li>
+                        <a class="nav-link text-danger" href="./estadisticas.php">Estadisticas</a>
+                    </li>
                 {else}
                     <li class="nav-item">
                         <a class="nav-link" href="./login.php">Iniciar sesion</a>
