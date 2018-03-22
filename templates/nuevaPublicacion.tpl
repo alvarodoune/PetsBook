@@ -14,8 +14,6 @@
         <link href="./libs/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 
         <style>
-            /* Always set the map height explicitly to define the size of the div
-             * element that contains the map. */
             #map {
                 height: 400px;
                 width: 100%;
@@ -130,9 +128,9 @@
                 <script async defer
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD01D0EbO2sskocLLV5Q0_s5c_FiR4qA1k&callback=initMap">
                 </script>
-
+                <br>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-primary col-12">Crear</button>
                 </div>
             </form>
         </div>

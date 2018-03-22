@@ -18,29 +18,32 @@
 
         {include file="encabezado.tpl"}
 
-        <div>
+        <div class="col-12">
             <form id="register" method="POST" action="doRegister.php">
-                <p>
-                    Email <input type="email" name="email" title="El email es requerido" required>
-                </p>
-                <p>
-                    Nombre <input type="text" name="name" title="El nombre es requerido" required>
-                </p>
-                <p>
-                    Clave <input type="password"
-                                 name="pass"
-                                 minlength="8"
-                                 required
-                                 pattern="^(?=.*[0-9])(?=.*[a-z])([a-z0-9_-]+)$" 
-                                 title="Debe tener 8 dígitos con al menos una letra y un número.">
-                </p>
+                <div class="form-group">
+                    <label class="form-check-label">Email</label>
+                    <input type="email" name="email" title="El email es requerido" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-check-label">Nombre</label>
+                    <input type="text" name="name" title="El nombre es requerido" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-check-label">Clave</label>
+                    <input type="password"
+                           name="pass"
+                           minlength="8"
+                           required
+                           pattern="^(?=.*[0-9])(?=.*[a-z])([a-z0-9_-]+)$" 
+                           title="Debe tener 8 dígitos con al menos una letra y un número.">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Registrarse</button>
+                </div>
+
                 {if (isset($err))}
                     Usuario/Clave invalidos
                 {/if}
-                <p>
-                    <input type="submit" value="Registrarse">
-                </p>
-
                 <div id="registerSuccessAlert" 
                      class="alert alert-success"
                      role="alert">

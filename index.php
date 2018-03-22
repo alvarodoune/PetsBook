@@ -8,5 +8,3 @@ $miSmarty->assign('razas', getRazas());
 $miSmarty->assign('barrios', getBarrios());
 
 $miSmarty->display('index.tpl');
-
-?>

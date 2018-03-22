@@ -40,8 +40,8 @@
                 {/if}
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="txtFiltro">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnFiltrar">Buscar</button>
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" id="txtFiltro">
+                <button class="btn btn-outline-success my-2 my-sm-2" type="submit" id="btnFiltrar">Filtrar</button>
             </form>
         </div>
     </nav>

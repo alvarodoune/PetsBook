@@ -8,7 +8,6 @@ $recordar = $_POST['recordar'];
 $usuario_logueado = login($usuario, $clave, $recordar);
 
 if(isset($usuario_logueado)){
-    
     // Tomar la sesion
     session_start();
     // guardar el usuario en la sesion
