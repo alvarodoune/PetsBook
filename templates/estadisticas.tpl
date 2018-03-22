@@ -15,40 +15,50 @@
     </head>
 
     <body>
-        <div class="header">
-            {include file="./encabezado.tpl"}
-        </div>
-        <div>
-            <h1>Estadísticas</h1>
-            <p>Cantidad de publicaciones: {$qtyPublicaciones.qty}</p>
-            <p>Cantidad de publicaciones por tipo</p>
-            {foreach from=$qtyPublicacionesXTipo item=data}
-                {if $data.tipo == "E"}
-                    <p>Encontradas: {$data.qty}</p>
-                {else}
-                    <p>Perdidas: {$data.qty}</p>
-                {/if}
-            {/foreach}
-            <p>Cantidad de publicaciones por especie</p>
-            {foreach from=$qtyPublicacionesXEspecie item=data}
-                <p>{$data.especie}: {$data.qty}</p>
-            {/foreach}
-            <p>Cantidad de publicaciones por estado</p>
-            {foreach from=$qtyPublicacionesXEstado item=data}
-                {if $data.abierto == 0}
-                    <p>Cerradas: {$data.qty}</p>
-                {else}
-                    <p>Abiertas: {$data.qty}</p>
-                {/if}
-            {/foreach}
-            <p>Cantidad de publicaciones agrupadas por resultado</p>
-            {foreach from=$qtyPublicacionesXResultado item=data}
-                {if $data.exitoso == 0}
-                    <p>Resultado negativo: {$data.qty}</p>
-                {else}
-                    <p>Resultado exitoso: {$data.qty}</p>
-                {/if}
-            {/foreach}
+        <div class="container">
+            <div class="header">
+                {include file="./encabezado.tpl"}
+            </div>
+            <div>
+                <h1>Estadísticas</h1>
+                <p>Cantidad de publicaciones: {$qtyPublicaciones.qty}</p>
+                <p>Cantidad de publicaciones por tipo</p>
+                <ul>
+                    {foreach from=$qtyPublicacionesXTipo item=data}
+                    {if $data.tipo == "E"}
+                        <li>Encontradas: {$data.qty}</li>
+                    {else}
+                        <li>Perdidas: {$data.qty}</li>
+                    {/if}
+                {/foreach}
+                </ul>
+                <p>Cantidad de publicaciones por especie</p>
+                <ul>
+                {foreach from=$qtyPublicacionesXEspecie item=data}
+                    <li>{$data.especie}: {$data.qty}</li>
+                {/foreach}
+                </ul>
+                <p>Cantidad de publicaciones por estado</p>
+                <ul>
+                {foreach from=$qtyPublicacionesXEstado item=data}
+                    {if $data.abierto == 0}
+                        <li>Cerradas: {$data.qty}</li>
+                    {else}
+                        <li>Abiertas: {$data.qty}</li>
+                    {/if}
+                {/foreach}
+                </ul>
+                <p>Cantidad de publicaciones agrupadas por resultado</p>
+                <ul>
+                {foreach from=$qtyPublicacionesXResultado item=data}
+                    {if $data.exitoso == 0}
+                        <li>Resultado negativo: {$data.qty}</li>
+                    {else}
+                        <li>Resultado exitoso: {$data.qty}</li>
+                    {/if}
+                {/foreach}
+                </ul>
+            </div>
         </div>
     </body>
 </html>
