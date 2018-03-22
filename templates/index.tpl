@@ -25,10 +25,7 @@
                 </div>
             </div>
             <nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand" href="#">Filtros avanzados +</a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a class="navbar-brand collapsed" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation" href="#">Filtros avanzados +</a>
                 <div class="navbar-collapse collapse" id="navbarsExample01" style="">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -67,7 +64,7 @@
                             </select>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnFiltrar">Actualizar</button>
+                            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnFiltrar">Actualizar</button>-->
                         </li>
                     </ul>
                 </div>
