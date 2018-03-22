@@ -1,10 +1,11 @@
 <?php
 
 require_once './libs/Smarty.class.php';
+require_once 'config/configuracion.php';
 require_once './includes/class.Conexion.BD.php';
 
 function getConexion() {
-    $cn = new ConexionBD('mysql', 'localhost', 'mascotas', 'root', 'root');
+    $cn = new ConexionBD(MOTOR, SERVIDOR, BASEDATOS, USUARIOBASE, CLAVEBASE);
     $cn->conectar();
     return $cn;
 }
