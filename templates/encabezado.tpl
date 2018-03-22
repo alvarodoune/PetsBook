@@ -23,17 +23,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="./index.php">Página de Inicio<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Filtrar
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Encontradas</a>
-                        <a class="dropdown-item" href="#">Perdidas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
                 {if (isset($usuario))}
                     <li>
                         <a class="nav-link text-success" href="./estadisticas.php">Estadisticas</a>
