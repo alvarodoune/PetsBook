@@ -7,7 +7,7 @@
  */
 require_once './datos.php';
 
-$smarty = new Smarty();
+$smarty = nuevoSmarty();
 
 //Cantidad de publicaciones
 $smarty->assign('qtyPublicaciones', getQtyPublicaciones());
@@ -26,4 +26,3 @@ $smarty->assign('qtyPublicacionesXEstado', getQtyPublicacionesXEstado());
 $smarty->assign('qtyPublicacionesXResultado', getQtyPublicacionesXResultado());
 
 $smarty->display('estadisticas.tpl');
-?>
